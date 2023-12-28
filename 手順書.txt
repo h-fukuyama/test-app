@@ -1,0 +1,50 @@
+Reactでウェブアプリを構築し、リリースするまでの手順書メモ
+
+-------------------------------------------------------------------
+React.jsの環境構築
+
+インストールするパッケージ
+①nvm-windows:   node.jsのバージョン管理ツール
+②node.js:       サーバサイドJavaScript環境
+③npm:           Nodeのパッケージマネージャー
+
+①nvm-windowsのインストール
+1. https://github.com/coreybutler/nvm-windows/releases/ にアクセスしてnvm-setup.zipをインストール
+2. "I accept the agreement" を選択して、Nextを選択
+    C:\Users\h-fukuyama\AppData\Roaming\nvmに格納された
+3. Windows PowerShellを開き、nvm -vを入力
+    1.1.12が表示されていることを確認しインストール完了
+
+②node.jsのインストール
+1. https://nodejs.org/enにアクセスし、ほとんどのユーザーに推奨とされているバージョンを確認
+    現在は20.10.0
+2. PowerShellでnvm install v20.10.0を入力
+3. nvm lsでバージョンが表示されることを確認
+4. nvm use v20.10.0を入力し、指定したバージョンを利用する
+    node -vで確認しインストール完了。
+
+③npmのインストール
+1. ②でnode.jsをインストール時にnpmもインストールされているのでnpm -vでバージョンを確認。
+
+-------------------------------------------------------------------------------
+GitHub上でのリポジトリの作成
+1. react_test_appのリポジトリをPublicで作成
+
+-------------------------------------------------------------------------------
+プロジェクトの生成
+
+1. ローカルの任意のデイレクトリに移動
+2. npx create-react-app アプリのフォルダ名
+    質問にはyで回答
+    Happy hacking!が表示されたことを確認すればapp生成は完了
+3. package.jsonに
+    dependenciesの前に
+    "homepage": "https://h-fukuyama(ユーザ名).github.io/react_test_app(リポジトリ名)",
+    scriptsプロパティ内に
+    "rm": "rm -rf docs",
+    "mv": "mv build docs",
+    "git": "git add . && git commit && git push origin master",
+    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
+    を追記
+
+
