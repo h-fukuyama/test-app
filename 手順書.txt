@@ -12,13 +12,13 @@ React.jsの環境構築
 1. https://github.com/coreybutler/nvm-windows/releases/ にアクセスしてnvm-setup.zipをインストール
 2. "I accept the agreement" を選択して、Nextを選択
     C:\Users\h-fukuyama\AppData\Roaming\nvmに格納された
-3. Windows PowerShellを開き、nvm -vを入力
+3. Git Bashを開き、nvm -vを入力
     1.1.12が表示されていることを確認しインストール完了
 
 ②node.jsのインストール
 1. https://nodejs.org/enにアクセスし、ほとんどのユーザーに推奨とされているバージョンを確認
     現在は20.10.0
-2. PowerShellでnvm install v20.10.0を入力
+2. Git Bashでnvm install v20.10.0を入力
 3. nvm lsでバージョンが表示されることを確認
 4. nvm use v20.10.0を入力し、指定したバージョンを利用する
     node -vで確認しインストール完了。
@@ -28,7 +28,7 @@ React.jsの環境構築
 
 -------------------------------------------------------------------------------
 GitHub上でのリポジトリの作成
-1. react_test_appのリポジトリをPublicで作成
+1. test-appのリポジトリをPublicで作成
 
 -------------------------------------------------------------------------------
 プロジェクトの生成
@@ -39,12 +39,23 @@ GitHub上でのリポジトリの作成
     Happy hacking!が表示されたことを確認すればapp生成は完了
 3. package.jsonに
     dependenciesの前に
-    "homepage": "https://h-fukuyama(ユーザ名).github.io/react_test_app(リポジトリ名)",
+    "homepage": "https://h-fukuyama(ユーザ名).github.io/test-app(リポジトリ名)/",
     scriptsプロパティ内に
     "rm": "rm -rf docs",
     "mv": "mv build docs",
     "git": "git add . && git commit && git push origin master",
     "deploy": "npm run rm && npm run build && npm run mv && npm run git"
     を追記
+4. Git Bashでnpm run deployを実行する
+    Commitで変更箇所があればMessageを記入して閉じる
+
+----------------------------------------------------------------------------------
+GitHub上でのページの有効化
+
+1. SettingからPagesをクリック
+2. SourceのBranchを「None」から「master/docs」に切替てSave
+3. Actionsのworkflowが正常に緑になっていたらgithub pagesのURLを叩くと初期画面が投影される
+
+----------------------------------------------------------------------------------
 
 
