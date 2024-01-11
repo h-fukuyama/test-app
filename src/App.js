@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import OthrComponent from './components/OthrComponent';
+import MainComponent from './components/MainComponent';
+import ScComponent from './components/ScComponent';
+import MenuComponent from './components/MenuComponent';
+import IsmsComponent from './components/IsmsComponent';
+import LtComponent from './components/LtComponent';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/main" element={<MainComponent />} />
+        <Route path="/sc" element={<ScComponent />} />
+        <Route path="/menu" element={<MenuComponent />} />
+        <Route path="/isms" element={<IsmsComponent />} />
+        <Route path="/lt" element={<LtComponent />} />
+        <Route path="/othr" element={<OthrComponent />} />
+      </Routes>
+    </Router>
   );
 }
 

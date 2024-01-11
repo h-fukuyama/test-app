@@ -1,0 +1,18 @@
+import { Link } from 'react-router-dom';
+
+const Header = () => {
+    return (
+        <nav>
+            <ul>
+                <li><Link to="/main">main</Link></li>
+                <li><Link to="/sc">sc(スタッフコール)</Link></li>
+                <li><Link to="/menu">menu</Link></li>
+                <li><Link to="/isms">isms</Link></li>
+                <li><Link to="/lt">ローカルタイマー</Link></li>
+                <li><Link to="/othr">othr</Link></li>
+            </ul>
+        </nav>
+    );
+}
+
+export default Header;
