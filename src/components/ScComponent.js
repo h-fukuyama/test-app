@@ -46,7 +46,7 @@ const ScComponent = () => {
 
   const extractScConfig = (content) => {
     // Assuming the structure is { if_config: { sc: ... } }
-    return content && content.if_config && content.if_config.sc;
+    return content && content.if_config && content.if_config.othr;
   };
 
   return (
