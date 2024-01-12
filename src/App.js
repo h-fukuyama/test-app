@@ -18,10 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<FileInputScreen />} />
           <Route path="/main" element={<MainComponent />} />
-          <Route path="/sc" element={<ScComponent />} />
-          <Route path="/menu" element={<MenuComponent />} />
-          <Route path="/isms" element={<IsmsComponent />} />
-          <Route path="/lt" element={<LtComponent />} />
+          <Route path="/sc" element={<ScComponent />} /> {/* 詳細表示が必要 */}
+          <Route path="/menu" element={<MenuComponent />} /> {/* 詳細表示が必要 */} 
+          <Route path="/isms" element={<IsmsComponent />} /> {/* A~ZZまでのルールが煩雑になるようなら詳細表示が必要? */}
+          <Route path="/lt" element={<LtComponent />} /> {/* 詳細表示が必要 */}
           <Route path="/othr" element={<OthrComponent />} />
         </Routes>
       </FileProvider>
