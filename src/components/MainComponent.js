@@ -1,47 +1,12 @@
 // MainComponent.js
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useFileContext } from '../context/FileContext';
 import Header from './Header';
+import useFileContent from '../utils/useFileContent';
 
 const MainComponent = () => {
   const { file } = useFileContext();
-  const [fileContent, setFileContent] = useState(null);
-
-  useEffect(() => {
-    if (file) {
-      readFileContent(file);
-    }
-  }, [file]);
-
-  const readFileContent = async (file) => {
-    try {
-      const content = await readFile(file);
-      setFileContent(content);
-    } catch (error) {
-      console.error('Error reading file:', error);
-    }
-  };
-
-  const readFile = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        try {
-          const content = JSON.parse(event.target.result);
-          resolve(content);
-        } catch (parseError) {
-          reject(parseError);
-        }
-      };
-
-      reader.onerror = (error) => {
-        reject(error);
-      };
-
-      reader.readAsText(file);
-    });
-  };
+  const { fileContent } = useFileContent(file);
 
   return (
     <div>
