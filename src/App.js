@@ -1,22 +1,22 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { FileProvider } from './context/FileContext'; // Import FileProvider
+import { FileProvider } from './context/FileContext';
 import OthrComponent from './components/OthrComponent';
 import MainComponent from './components/MainComponent';
 import ScComponent from './components/ScComponent';
 import MenuComponent from './components/MenuComponent';
 import IsmsComponent from './components/IsmsComponent';
 import LtComponent from './components/LtComponent';
-import FileInputScreen from './components/FileInputScreen'; // Fix import path
+import FileInputScreen from './components/FileInputScreen';
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <FileProvider> {/* Wrap your application with FileProvider */}
+      <FileProvider> {/*以下がFileContext.jsコンポーネントのchildrenプロパティになる*/}
         <Routes>
-          <Route path="/" element={<FileInputScreen />} /> {/* Fix component name */}
+          <Route path="/" element={<FileInputScreen />} />
           <Route path="/main" element={<MainComponent />} />
           <Route path="/sc" element={<ScComponent />} />
           <Route path="/menu" element={<MenuComponent />} />
