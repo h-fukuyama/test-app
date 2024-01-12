@@ -12,7 +12,7 @@ const MainComponent = () => {
     <div>
       {file && (
         <div>
-          <Header file={file} />
+          <Header />
           <h2>Main Page</h2>
           <p>File Name: {file.name}</p>
           {fileContent && (

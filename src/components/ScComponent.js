@@ -10,20 +10,20 @@ const ScComponent = () => {
 
   return (
     <div>
-      {file && (
+      {file && ( //fileが存在すれば以下を表示
         <div>
-          <Header file={file} />
+          <Header />
           <h2>Sc Page</h2>
           <p>File Name: {file.type}</p>
           {fileContent && (
             <div>
               <h3>Sc Config</h3>
-              <pre>{JSON.stringify(fileContent.if_config.othr, null, 2)}</pre>
+              <pre>{JSON.stringify(fileContent.if_config.sc, null, 2)}</pre>
             </div>
           )}
         </div>
       )}
-      {!file && <h2>Sc Page</h2>}
+      {!file && <h2>Sc Page</h2>} {/* fileが存在しなければタイトルだけ表示（/に遷移するとかでもよさそう) */}
     </div>
   );
 };
