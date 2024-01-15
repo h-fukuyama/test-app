@@ -9,11 +9,16 @@ const OthrComponent = () => {
   const { fileContent } = useFileContent(file); //fileのファイルの内容を読み込む
 
   const OthrProcessor = ({ other }) => {
-    const otherPropertyFunctions = [processFunction1];
+    const otherPropertyFunctions = [
+      processFunction1, processFunction2, processFunction3, processFunction4, processFunction5, processFunction6, processFunction7, processFunction8, processFunction9, processFunction10,
+      processFunction11, processFunction12, processFunction13, processFunction14, processFunction15, processFunction16, processFunction17, processFunction18, processFunction19, processFunction20,
+      processFunction21, processFunction22, processFunction23, processFunction24, processFunction25, processFunction26, processFunction27, processFunction28, processFunction29, processFunction30,
+      processFunction31, processFunction32, processFunction33
+    ];
 
     const results = [];
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 32; i++) {
       const property = other[i];
       const func = otherPropertyFunctions[i];
 
@@ -24,6 +29,7 @@ const OthrComponent = () => {
     return results;
   };
 
+  // ここから１行ずつのルール定義に入る(1~33行目)------------------------
   const processFunction1 = (property) => {
     const result1 = [];
     const binaryString = hexToBinary(property);
@@ -51,6 +57,200 @@ const OthrComponent = () => {
     return result1;
   };
 
+  const processFunction2 = (property) => {
+    const result2 = [];
+
+    return result2;
+  };
+
+  const processFunction3 = (property) => {
+    const result3 = [];
+
+    return result3;
+  };
+
+  const processFunction4 = (property) => {
+    const result4 = [];
+
+    return result4;
+  };
+
+  const processFunction5 = (property) => {
+    const result5 = [];
+
+    return result5;
+  };
+
+  const processFunction6 = (property) => {
+    const result6 = [];
+
+    return result6;
+  };
+
+  const processFunction7 = (property) => {
+    const result7 = [];
+
+    return result7;
+  };
+
+  const processFunction8 = (property) => {
+    const result8 = [];
+
+    return result8;
+  };
+
+  const processFunction9 = (property) => {
+    const result9 = [];
+
+    return result9;
+  };
+
+  const processFunction10 = (property) => {
+    const result10 = [];
+
+    return result10;
+  };
+
+  const processFunction11 = (property) => {
+    const result11 = [];
+
+    return result11;
+  };
+
+  const processFunction12 = (property) => {
+    const result12 = [];
+
+    return result12;
+  };
+
+  const processFunction13 = (property) => {
+    const result13 = [];
+
+    return result13;
+  };
+
+  const processFunction14 = (property) => {
+    const result14 = [];
+
+    return result14;
+  };
+
+  const processFunction15 = (property) => {
+    const result15 = [];
+
+    return result15;
+  };
+
+  const processFunction16 = (property) => {
+    const result15 = [];
+
+    return result15;
+  };
+
+  const processFunction17 = (property) => {
+    const result17 = [];
+
+    return result17;
+  };
+
+  const processFunction18 = (property) => {
+    const result18 = [];
+
+    return result18;
+  };
+
+  const processFunction19 = (property) => {
+    const result19 = [];
+
+    return result19;
+  };
+
+  const processFunction20 = (property) => {
+    const result20 = [];
+
+    return result20;
+  };
+
+  const processFunction21 = (property) => {
+    const result21 = [];
+
+    return result21;
+  };
+
+  const processFunction22 = (property) => {
+    const result22 = [];
+
+    return result22;
+  };
+
+  const processFunction23 = (property) => {
+    const result23 = [];
+
+    return result23;
+  };
+
+  const processFunction24 = (property) => {
+    const result24 = [];
+
+    return result24;
+  };
+
+  const processFunction25 = (property) => {
+    const result25 = [];
+
+    return result25;
+  };
+
+  const processFunction26 = (property) => {
+    const result26 = [];
+
+    return result26;
+  };
+
+  const processFunction27 = (property) => {
+    const result27 = [];
+
+    return result27;
+  };
+
+  const processFunction28 = (property) => {
+    const result28 = [];
+
+    return result28;
+  };
+
+  const processFunction29 = (property) => {
+    const result29 = [];
+
+    return result29;
+  };
+
+  const processFunction30 = (property) => {
+    const result30 = [];
+
+    return result30;
+  };
+
+  const processFunction31 = (property) => {
+    const result31 = [];
+
+    return result31;
+  };
+
+  const processFunction32 = (property) => {
+    const result32 = [];
+
+    return result32;
+  };
+
+  const processFunction33 = (property) => {
+    const result33 = [];
+
+    return result33;
+  };
+
+
+// ここまで-----------------------------------------------------------
   const results_all = OthrProcessor({ other: fileContent?.if_config?.othr || [] });
 
   return (
