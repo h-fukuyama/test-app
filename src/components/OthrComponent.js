@@ -2,6 +2,7 @@ import React from 'react';
 import { useFileContext } from '../context/FileContext';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
+import { processBGMBand } from '../utils/bgmBand';
 import { hexToBinary, checkBit } from '../utils/calculate';
 
 const OthrComponent = () => {
@@ -18,7 +19,7 @@ const OthrComponent = () => {
 
     const results = [];
 
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 33 ; i++) {
       const property = other[i];
       const func = otherPropertyFunctions[i];
 
@@ -57,41 +58,64 @@ const OthrComponent = () => {
     return result1;
   };
 
+  //未使用
   const processFunction2 = (property) => {
     const result2 = [];
+    result2.push({ property, value: "未使用" });
 
     return result2;
   };
 
+  //未使用
   const processFunction3 = (property) => {
     const result3 = [];
+    result3.push({ property, value: "未使用" });
 
     return result3;
   };
 
+  //未使用
   const processFunction4 = (property) => {
     const result4 = [];
+    result4.push({ property, value: "未使用" });  
 
     return result4;
   };
 
+  //未使用
   const processFunction5 = (property) => {
     const result5 = [];
+    result5.push({ property, value: "未使用" });
 
     return result5;
   };
 
   const processFunction6 = (property) => {
     const result6 = [];
+    result6.push({ property: "radiko放送局名", value: (property ? property.trim() : "") || '未設定' })
 
     return result6;
   };
 
   const processFunction7 = (property) => {
     const result7 = [];
-
+  
+    // property が存在するか確認
+    if (property) {
+      const firstTwoDigits = property.substring(0, 2);
+      const lastTwoDigits = parseInt(property.substring(2), 16);
+      const bgm = processBGMBand(firstTwoDigits);
+  
+      // 結果を配列に追加
+      result7.push({ property: 'BGMバンド', value: `${bgm}${lastTwoDigits}` });
+    } else {
+      // property が存在しない場合の処理
+      result7.push({ property: 'BGMバンド', value: '未設定' });
+    }
+  
     return result7;
   };
+  
 
   const processFunction8 = (property) => {
     const result8 = [];
@@ -264,15 +288,20 @@ const OthrComponent = () => {
             <div>
               <h3>Othr Config</h3>
               {results_all.map((result, index) => (
-                <div key={index}>
-                  <h4>{`Result ${index + 1}`}</h4>
-                  <ul>
-                    {result.map(({ property, value }) => (
-                      <li key={property}>{`${property}: ${value}`}</li>
-                    ))}
-                  </ul>
+              <div key={index}>
+                <h4>{`Result ${index + 1}`}</h4>
+                <div>
+                  {result.map(({ property, value }) => (
+                    <div
+                      key={property}
+                      className={`${value === 'ON' ? 'underline' : ''} ${value === '未使用' ? 'line-through' : ''}`}
+                    >
+                      {`${property}: ${value}`}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+            ))}
             </div>
           ) : (
             <p>Loading...</p>
