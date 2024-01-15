@@ -15,11 +15,13 @@ const MainComponent = () => {
           <Header />
           <h2>Main Page</h2>
           <p>File Name: {file.name}</p>
-          {fileContent && (
+          {fileContent? (
             <div>
               <h3>File Content</h3>
               <pre>{JSON.stringify(fileContent, null, 2)}</pre>
             </div>
+          ) : (
+            <p>Loading...</p>
           )}
         </div>
       )}
