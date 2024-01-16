@@ -168,62 +168,115 @@ const OthrComponent = () => {
       const volume = parseInt(property, 16);
       result12.push({ property: '店内音量', value: `${volume}` });
     } else {
-      result12.push({ property: '店内音量', value: '未設定' });
+      result12.push({ property: '店内音量', value: '不明' });
     }
     return result12;
   };
 
   const processFunction13 = (property) => {
     const result13 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      if (volume === 255 ) {
+        result13.push({ property: '店内音量基準値', value: '未設定' });
+      } else {
+        result13.push({ property: '店内音量基準値', value: `${volume}` });
+      }
+    } else {
+      result13.push({ property: '店内音量基準値', value: '不明' });
+    }
     return result13;
   };
 
   const processFunction14 = (property) => {
     const result14 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      result14.push({ property: '事務所音量', value: `${volume}` });
+    } else {
+      result14.push({ property: '事務所音量', value: '不明' });
+    }
     return result14;
   };
 
   const processFunction15 = (property) => {
     const result15 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      if (volume === 255 ) {
+        result15.push({ property: '事務所音量基準値', value: '未設定' });
+      } else {
+        result15.push({ property: '事務所音量基準値', value: `${volume}` });
+      }
+    } else {
+      result15.push({ property: '事務所音量基準値', value: '不明' });
+    }
     return result15;
   };
 
   const processFunction16 = (property) => {
-    const result15 = [];
-
-    return result15;
+    const result16 = [];
+    if (property) {
+      const volume = parseInt(property, 16);
+      result16.push({ property: '店内CMバランス', value: `${volume}%` });
+    } else {
+      result16.push({ property: '店内CMバランス', value: '不明' });
+    }
+    return result16;
   };
 
   const processFunction17 = (property) => {
     const result17 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      result17.push({ property: '店内CMバランス基準値', value: `${volume}%` });
+    } else {
+      result17.push({ property: '店内バランス基準値', value: '不明' });
+    }
     return result17;
   };
 
   const processFunction18 = (property) => {
     const result18 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      result18.push({ property: '事務所CMバランス', value: `${volume}%` });
+    } else {
+      result18.push({ property: '事務所CMバランス', value: '不明' });
+    }
     return result18;
   };
 
   const processFunction19 = (property) => {
     const result19 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      result19.push({ property: '事務所CMバランス基準値', value: `${volume}%` });
+    } else {
+      result19.push({ property: '事務所CMバランス基準値', value: '不明' });
+    }
     return result19;
   };
 
   const processFunction20 = (property) => {
     const result20 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      result20.push({ property: 'インカム音量ライン出力', value: `${volume}` });
+    } else {
+      result20.push({ property: 'インカム音量ライン出力', value: '不明' });
+    }
     return result20;
   };
 
   const processFunction21 = (property) => {
     const result21 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      result16.push({ property: '店内CMバランス', value: `${volume}%` });
+    } else {
+      result16.push({ property: '店内CMバランス', value: '不明' });
+    }
     return result21;
   };
 
