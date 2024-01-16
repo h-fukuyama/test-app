@@ -99,17 +99,12 @@ const OthrComponent = () => {
 
   const processFunction7 = (property) => {
     const result7 = [];
-  
-    // property が存在するか確認
     if (property) {
       const firstTwoDigits = property.substring(0, 2);
       const lastTwoDigits = parseInt(property.substring(2), 16);
       const bgm = processBGMBand(firstTwoDigits);
-  
-      // 結果を配列に追加
       result7.push({ property: 'BGMバンド', value: `${bgm}${lastTwoDigits}` });
     } else {
-      // property が存在しない場合の処理
       result7.push({ property: 'BGMバンド', value: '未設定' });
     }
   
