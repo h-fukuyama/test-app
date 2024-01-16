@@ -114,31 +114,62 @@ const OthrComponent = () => {
 
   const processFunction8 = (property) => {
     const result8 = [];
-
+    if (property) {
+      const firstTwoDigits = property.substring(0, 2);
+      const lastTwoDigits = parseInt(property.substring(2), 16);
+      const bgm = processBGMBand(firstTwoDigits);
+      result8.push({ property: '最大BGMバンド', value: `${bgm}${lastTwoDigits}` });
+    } else {
+      result8.push({ property: '最大BGMバンド', value: '未設定' });
+    }
     return result8;
   };
 
   const processFunction9 = (property) => {
     const result9 = [];
-
+    if (property) {
+      const firstTwoDigits = parseInt(property.substring(0, 2), 16);
+      if(firstTwoDigits === 0) {
+        result9.push({ property: '範囲外チャンネル', value: '未設定' })
+      } else {
+        result9.push({ property: '範囲外チャンネル', value: `${firstTwoDigits}` })
+      }
+    } else {
+      result9.push({ property: '範囲外チャンネル', value: '未設定' })
+    }
     return result9;
   };
 
   const processFunction10 = (property) => {
     const result10 = [];
-
+    if (property) {
+      const band = processBGMBand(property);
+      result10.push({ property: '範囲外バンド', value: `${band}` });
+    } else {
+      result10.push({ property: '範囲外バンド', value: '未設定' });
+    }
     return result10;
   };
 
   const processFunction11 = (property) => {
     const result11 = [];
-
+    if (property) {
+      const band = processBGMBand(property);
+      result11.push({ property: '保存用バンド', value: `${band}` });
+    } else {
+      result11.push({ property: '保存用バンド', value: '未設定' });
+    }
     return result11;
   };
 
   const processFunction12 = (property) => {
     const result12 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      result12.push({ property: '店内音量', value: `${volume}` });
+    } else {
+      result12.push({ property: '店内音量', value: '未設定' });
+    }
     return result12;
   };
 

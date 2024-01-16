@@ -10,6 +10,9 @@ export const processBGMBand = (firstTwoDigits) => {
     } else if (firstTwoDigits === 'FF') {
       // AUX
       return 'AUX';
+    } else if (firstTwoDigits === '00') {
+        // 未設定
+        return '未設定';
     } else {
       // それ以外の場合は不明
       return '不明';
