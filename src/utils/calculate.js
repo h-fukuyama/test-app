@@ -7,3 +7,8 @@
   export const checkBit = (binaryString, position) => {
     return binaryString.charAt(binaryString.length - 1 - position) === '1';
   };
+
+  //符号付16進数を10進数に変換するヘルパー関数
+  export const hexToSignedDecimal = (hexString) => {
+    return hexString > 0x7FFFFFFF ? hexString - 0x100000000 : hexString;
+  }

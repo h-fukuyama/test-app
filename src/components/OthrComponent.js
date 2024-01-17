@@ -3,7 +3,8 @@ import { useFileContext } from '../context/FileContext';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
 import { processBGMBand } from '../utils/bgmBand';
-import { hexToBinary, checkBit } from '../utils/calculate';
+import { processVolume } from '../utils/processVolume';
+import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
 
 const OthrComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -163,14 +164,7 @@ const OthrComponent = () => {
   };
 
   const processFunction12 = (property) => {
-    const result12 = [];
-    if (property) {
-      const volume = parseInt(property, 16);
-      result12.push({ property: '店内音量', value: `${volume}` });
-    } else {
-      result12.push({ property: '店内音量', value: '不明' });
-    }
-    return result12;
+    return processVolume(property, '店内音量');
   };
 
   const processFunction13 = (property) => {
@@ -189,14 +183,7 @@ const OthrComponent = () => {
   };
 
   const processFunction14 = (property) => {
-    const result14 = [];
-    if (property) {
-      const volume = parseInt(property, 16);
-      result14.push({ property: '事務所音量', value: `${volume}` });
-    } else {
-      result14.push({ property: '事務所音量', value: '不明' });
-    }
-    return result14;
+    return processVolume(property, '事務所音量');
   };
 
   const processFunction15 = (property) => {
@@ -259,72 +246,85 @@ const OthrComponent = () => {
   };
 
   const processFunction20 = (property) => {
-    const result20 = [];
-    if (property) {
-      const volume = parseInt(property, 16);
-      result20.push({ property: 'インカム音量ライン出力', value: `${volume}` });
-    } else {
-      result20.push({ property: 'インカム音量ライン出力', value: '不明' });
-    }
-    return result20;
+    return processVolume(property, 'インカム音量ライン出力');
   };
 
   const processFunction21 = (property) => {
     const result21 = [];
     if (property) {
-      const volume = parseInt(property, 16);
-      result16.push({ property: '店内CMバランス', value: `${volume}%` });
+      const volume = hexToSignedDecimal(parseInt(property, 16));
+      result21.push({ property: 'インカム音量インカム出力', value: `${volume}` });
     } else {
-      result16.push({ property: '店内CMバランス', value: '不明' });
+      result21.push({ property: 'インカム音量インカム出力', value: '不明' });
     }
     return result21;
   };
 
   const processFunction22 = (property) => {
     const result22 = [];
-
+    if (property) {
+      const volume = parseInt(property, 16);
+      if (volume === 255 ) {
+        result22.push({ property: 'インカム音量ライン出力基準値', value: '未設定' });
+      } else {
+        result22.push({ property: 'インカム音量ライン出力基準値', value: `${volume}` });
+      }
+    } else {
+      result22.push({ property: 'インカム音量ライン出力基準値', value: '不明' });
+    }
     return result22;
   };
 
   const processFunction23 = (property) => {
     const result23 = [];
-
+    if (property) {
+      const volume = hexToSignedDecimal(parseInt(property, 16));
+      if (volume === 255 ) {
+        result23.push({ property: 'インカム音量インカム出力基準値', value: '未設定' });
+      } else {
+        result23.push({ property: 'インカム音量インカム出力基準値', value: `${volume}` });
+      }
+    } else {
+      result23.push({ property: 'インカム音量インカム出力基準値', value: '不明' });
+    }
     return result23;
   };
 
   const processFunction24 = (property) => {
-    const result24 = [];
-
-    return result24;
+    return processVolume(property, 'イヤホン音量値');
   };
 
   const processFunction25 = (property) => {
-    const result25 = [];
-
-    return result25;
+    return processVolume(property, '再生/試聴店内音量値');
   };
 
   const processFunction26 = (property) => {
-    const result26 = [];
-
-    return result26;
+    return processVolume(property, '再生/試聴事務所音量値');
   };
 
   const processFunction27 = (property) => {
-    const result27 = [];
-
-    return result27;
+    return processVolume(property, '再生/試聴インカム音量値ライン');
   };
 
   const processFunction28 = (property) => {
     const result28 = [];
-
+    if (property) {
+      const volume = hexToSignedDecimal(parseInt(property, 16));
+      result28.push({ property: '再生/試聴インカム音量値インカム', value: `${volume}` });
+    } else {
+      result28.push({ property: '再生/試聴インカム音量値インカム', value: '不明' });
+    }
     return result28;
   };
 
   const processFunction29 = (property) => {
     const result29 = [];
-
+    if (property) {
+      const second = parseInt(property, 16);
+      result29.push({ property: 'CM総長', value: `${second}秒` });
+    } else {
+      result29.push({ property: 'CM総長', value: '不明' })
+    }
     return result29;
   };
 
