@@ -10,6 +10,7 @@ const Header = () => {
                 <li><Link to="/isms">isms</Link></li>
                 <li><Link to="/lt">ローカルタイマー</Link></li>
                 <li><Link to="/othr">othr</Link></li>
+                <li className="reset-link"><Link to="/reset">リセット</Link></li>
             </ul>
         </nav>
     );

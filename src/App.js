@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { FileProvider } from './context/FileContext';
@@ -9,12 +8,13 @@ import MenuComponent from './components/MenuComponent';
 import IsmsComponent from './components/IsmsComponent';
 import LtComponent from './components/LtComponent';
 import FileInputScreen from './components/FileInputScreen';
+import ResetComponent from './components/ResetComponent';
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <FileProvider> {/*以下がFileContext.jsコンポーネントのchildrenプロパティになる*/}
+      <FileProvider>
         <Routes>
           <Route path="/" element={<FileInputScreen />} />
           <Route path="/main" element={<MainComponent />} />
@@ -23,6 +23,7 @@ function App() {
           <Route path="/isms" element={<IsmsComponent />} /> {/* A~ZZまでのルールが煩雑になるようなら詳細表示が必要? */}
           <Route path="/lt" element={<LtComponent />} /> {/* 詳細表示が必要 */}
           <Route path="/othr" element={<OthrComponent />} />
+          <Route path="/reset" element={<ResetComponent />} />
         </Routes>
       </FileProvider>
     </Router>
