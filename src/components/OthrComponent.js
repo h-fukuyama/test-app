@@ -5,6 +5,7 @@ import useFileContent from '../utils/useFileContent';
 import { processBGMBand } from '../utils/bgmBand';
 import { processVolume } from '../utils/processVolume';
 import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
+import { checkButton } from '../utils/checkButton';
 
 const OthrComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -328,28 +329,49 @@ const OthrComponent = () => {
     return result29;
   };
 
+  //ルールがあってるか確認が必要？
   const processFunction30 = (property) => {
-    const result30 = [];
-
-    return result30;
+    return checkButton(property, 14, 'ワンタッチボタン');
   };
+  
 
   const processFunction31 = (property) => {
-    const result31 = [];
+    const results31 = [];
+    if (property) {
+      const binaryArray = property.split('').map((hexDigit) => {
+        const binaryDigit = parseInt(hexDigit, 16).toString(2).padStart(4, '0');
+          return binaryDigit;
+        });
+      
+      const binaryString = binaryArray.join('');
+  
+      for (let i = 0; i < 400; i++) {
+        const bitValue = binaryString[i];
+        const buttonName = `ボタン${i + 101}`;
+        const result = { property: buttonName, value: bitValue === '0' ? '許可' : '禁止' };
+        results31.push(result);
+      }
+  
+      const deniedButtons = results31.filter((result) => result.value === '禁止');
 
-    return result31;
+      if (results31.every((result) => result.value === '許可')) {
+        return [{ property: 'スタッフコール無線①', value: '全て許可' }];
+      } else if (results31.every((result) => result.value === '禁止')) {
+        return [{ property: 'スタッフコール無線①', value: '全て禁止' }];
+      }
+      return deniedButtons;
+    } else {
+      return [{ property: 'スタッフコール無線①', value: '不明' }];
+    }
   };
+  
 
   const processFunction32 = (property) => {
-    const result32 = [];
-
-    return result32;
+    return checkButton(property, 16, 'スタッフコール無線②');
   };
 
   const processFunction33 = (property) => {
-    const result33 = [];
-
-    return result33;
+    return checkButton(property, 16, 'スタッフコール有線');
   };
 
 
