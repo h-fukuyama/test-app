@@ -1,12 +1,19 @@
-// LtComponent.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFileContext } from '../context/FileContext';
+import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
 
 const LtComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
   const { fileContent } = useFileContent(file); //fileのファイルの内容を読み込む
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!file) {
+      navigate('/reset');
+    }
+  }, [file, navigate]);
 
   return (
     <div>
