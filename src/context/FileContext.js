@@ -10,8 +10,12 @@ export const FileProvider = ({ children }) => { //childrenプロパティを受�
     setFile(newFile);
   };
 
+  const resetFile = () => {
+    setFile(null); // ファイル情報を初期化
+  };
+
   return (
-    <FileContext.Provider value={{ file, setFileContext }}>
+    <FileContext.Provider value={{ file, setFileContext, resetFile }}>
       {children} {/* App.jsの親プロパティ*/}
     </FileContext.Provider>
   );
