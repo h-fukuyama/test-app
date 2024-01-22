@@ -7,7 +7,7 @@ import useFileContent from '../utils/useFileContent';
 import { processBGMBand } from '../utils/bgmBand';
 import { processVolume } from '../utils/processVolume';
 import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
-import { checkButton } from '../utils/checkButton';
+import { channelMask } from '../utils/checkButton';
 
 const IsmsComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -28,13 +28,22 @@ const IsmsComponent = () => {
 
     const results = [];
 
-    for (let i = 0; i < 1 ; i++) {
+    for (let i = 0; i < 14 ; i++) {
       const property = isms[i];
       const func = ismsPropertyFunctions[i];
+      const results2 = [];
 
-      const result = func(property);
-
-      results.push(result);
+      if ( i === 1 ) {
+        for ( let j = 0x41; j < 0x5A; j++ ) {
+          const bgmBand = processBGMBand(j);
+          const result = processFunction2(property, bgmBand);
+          results2.push(result);
+        }
+        results.push(results2);
+      } else {
+        const result = func(property);
+        results.push(result);
+      }
     }
     return results;
   };
@@ -62,9 +71,9 @@ const IsmsComponent = () => {
     return result1;
   };
   //チャンネルマスク
-  const processFunction2 = (property) => {
+  const processFunction2 = (property, prefix) => {
     const result2 = [];
-
+    result2.push(channelMask(property, prefix));
     return result2;
   };
   const processFunction3 = (property) => {
@@ -113,14 +122,18 @@ const IsmsComponent = () => {
     return result11;
   };
   const processFunction12 = (property) => {
-    return 
+    const result12 = [];
+
+    return result12;
   };
   const processFunction13 = (property) => {
     const result13 = [];
     return result13;
   };
   const processFunction14 = (property) => {
-    return 
+    const result14 = [];
+
+    return result14;
   };
 
   // ここまで-----------------------------------------------------------
@@ -136,7 +149,7 @@ const IsmsComponent = () => {
           <p>File Name: {file.name}</p>
           {fileContent && fileContent.if_config ? (
             <div className="card-container">
-              {results_all.map((result, index) => (
+              {results_all && results_all.map((result, index) => (
                 <div key={index} className="card">
                   <h4>{`Result ${index + 1}`}</h4>
                   <div style={{ marginBottom: '0.1em' }}>
@@ -163,6 +176,6 @@ const IsmsComponent = () => {
       )}
     </div>
   );
-};
+  };
 
 export default IsmsComponent;
