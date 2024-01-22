@@ -110,9 +110,21 @@ const IsmsComponent = () => {
     return [{ property, value: "未使用" }];
   };
   const processFunction12 = (property) => {
-    const result12 = [];
-
-    return result12;
+    if ( property === '00' ) {
+      return [{ property: '放送優先順位', value: 'ローカルタイマ > タイムテーブル > ワンタッチ分指定 > ワンタッチ連続' }];
+    } else if ( property === '01' ) {
+      return [{ property: '放送優先順位', value: 'ローカルタイマ > タイムテーブル > ワンタッチ連続 > ワンタッチ分指定' }];
+    } else if ( property === '02' ) {
+      return [{ property: '放送優先順位', value: 'ワンタッチ分指定 > ローカルタイマ > タイムテーブル > ワンタッチ連続' }];
+    } else if ( property === '03' ) {
+      return [{ property: '放送優先順位', value: 'ワンタッチ分指定 > ワンタッチ連続 > ローカルタイマ > タイムテーブル' }];
+    } else if ( property === '04' ) {
+      return [{ property: '放送優先順位', value: 'ワンタッチ連続 > ワンタッチ分指定 > ローカルタイマ > タイムテーブル' }];
+    } else if ( property === '05' ) {
+      return [{ property: '放送優先順位', value: ' ワンタッチ連続 > ローカルタイマ > タイムテーブル > ワンタッチ分指定' }];
+    } else {
+      return [{ property: '放送優先順位', value: '不明' }];
+    }
   };
   const processFunction13 = (property) => {
     const result13 = [];
