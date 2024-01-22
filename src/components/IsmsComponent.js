@@ -4,6 +4,10 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
+import { processBGMBand } from '../utils/bgmBand';
+import { processVolume } from '../utils/processVolume';
+import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
+import { checkButton } from '../utils/checkButton';
 
 const IsmsComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -16,22 +20,147 @@ const IsmsComponent = () => {
     }
   }, [file, navigate]);
 
+  const IsmsProcessor = ({ isms }) => {
+    const ismsPropertyFunctions = [
+      processFunction1, processFunction2, processFunction3, processFunction4, processFunction5, processFunction6, processFunction7, processFunction8, processFunction9, processFunction10,
+      processFunction11, processFunction12, processFunction13, processFunction14
+    ];
+
+    const results = [];
+
+    for (let i = 0; i < 1 ; i++) {
+      const property = isms[i];
+      const func = ismsPropertyFunctions[i];
+
+      const result = func(property);
+
+      results.push(result);
+    }
+    return results;
+  };
+
+   // ここから１行ずつのルール定義に入る(1~33行目)------------------------
+   const processFunction1 = (property) => {
+    const result1 = [];
+    const binaryString = hexToBinary(property);
+
+    const bitDefinitions = [
+      { bit: 3, property: '初期設定(「有効」で完了)' },
+      { bit: 4, property: 'スタッフコール' },
+      { bit: 5, property: 'ワンタッチボタン' },
+      { bit: 6, property: 'ローカルタイマー' },
+      { bit: 7, property: 'オリジナル録音' },
+      { bit: 8, property: 'バックアップBGM' },
+      { bit: 9, property: 'オフラインモード' },
+    ];
+
+    bitDefinitions.forEach(({ bit, property }) => {
+      const isBitSet = checkBit(binaryString, bit);
+      result1.push({ property, value: isBitSet ? '有効' : '無効' });
+    });
+
+    return result1;
+  };
+  //チャンネルマスク
+  const processFunction2 = (property) => {
+    const result2 = [];
+
+    return result2;
+  };
+  const processFunction3 = (property) => {
+    const result3 = [];
+
+    return result3;
+  };
+  const processFunction4 = (property) => {
+    const result4 = [];
+
+    return result4;
+  };
+  const processFunction5 = (property) => {
+    const result5 = [];
+
+    return result5;
+  };
+  const processFunction6 = (property) => {
+    const result6 = [];
+
+    return result6;
+  };
+  const processFunction7 = (property) => {
+    const result7 = [];
+  
+    return result7;
+  };
+  const processFunction8 = (property) => {
+    const result8 = [];
+
+    return result8;
+  };
+  const processFunction9 = (property) => {
+    const result9 = [];
+    
+    return result9;
+  };
+  const processFunction10 = (property) => {
+    const result10 = [];
+
+    return result10;
+  };
+  const processFunction11 = (property) => {
+    const result11 = [];
+
+    return result11;
+  };
+  const processFunction12 = (property) => {
+    return 
+  };
+  const processFunction13 = (property) => {
+    const result13 = [];
+    return result13;
+  };
+  const processFunction14 = (property) => {
+    return 
+  };
+
+  // ここまで-----------------------------------------------------------
+
+  const results_all = IsmsProcessor({ isms: fileContent?.if_config?.isms || [] });
+
   return (
     <div>
-      {file && ( //fileが存在すれば以下を表示
+      {file && (
         <div>
           <Header />
-          <h2>Isms Page</h2>
-          <p>File Name: {file.type}</p>
-          {fileContent && (
-            <div>
-              <h3>Isms Config</h3>
-              <pre>{JSON.stringify(fileContent.if_config.isms, null, 2)}</pre>
+          <h2>isms Page</h2>
+          <p>File Name: {file.name}</p>
+          {fileContent && fileContent.if_config ? (
+            <div className="card-container">
+              {results_all.map((result, index) => (
+                <div key={index} className="card">
+                  <h4>{`Result ${index + 1}`}</h4>
+                  <div style={{ marginBottom: '0.1em' }}>
+                    {result.map(({ property, value }) => (
+                      <div
+                        key={property}
+                        className={`${value === '有効' ? 'underline' : ''} ${value === '未使用' ? 'line-through' : ''}`}
+                        style={{ marginBottom: '0.5em' }}
+                      >
+                        {`${property}: ${value}`}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
+          ) : (
+            <p>Loading...</p>
           )}
         </div>
       )}
-      {!file && <h2>Isms Page</h2>} {/* fileが存在しなければタイトルだけ表示（/に遷移するとかでもよさそう) */}
+      {!file && (
+        <p>Resetting...</p>
+      )}
     </div>
   );
 };
