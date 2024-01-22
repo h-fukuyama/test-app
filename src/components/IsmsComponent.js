@@ -28,8 +28,8 @@ const IsmsComponent = () => {
 
     const results = [];
 
-    for (let i = 2; i < 14 ; i++) {
-      const property = isms[i+78];
+    for (let i = 0; i < 14 ; i++) {
+      const property = isms[i+77];
       const func = ismsPropertyFunctions[i];
       const results2 = [];
 
@@ -76,36 +76,70 @@ const IsmsComponent = () => {
     result2.push(channelMask(property, prefix));
     return result2;
   };
+  //未使用
   const processFunction3 = (property) => {
     return [{ property, value: "未使用" }];
   };
   const processFunction4 = (property) => {
-    const result4 = [];
-
-    return result4;
+    if (property === "00") {
+      return [{ property: 'DNS設定', value: '自動' }];
+    } else if (property === "01") {
+      return [{ property: 'DNS設定', value: '手動' }];
+    } else {
+      return [{ property: 'DNS設定', value: '不明' }];
+    }
   };
   const processFunction5 = (property) => {
-    const result5 = [];
-
-    return result5;
+    let result5 = '';
+    if ( property ){
+      for (let i = 0; i < property.length; i += 2) {
+        const twoBits = property.substr(i, 2);
+        const decimalValue = parseInt(twoBits, 2);
+        const formattedDecimal = decimalValue.toString().padStart(3, '0');
+        result5 += formattedDecimal;
+        if (i < property.length - 2) {
+          result5 += '.';
+        }
+      }
+    } else {
+      return [{ property: 'DNSプライマリ', value: '不明' }];
+    }
+    return [{ property: 'DNSプライマリ', value: result5 }];
   };
   const processFunction6 = (property) => {
-    const result6 = [];
-
-    return result6;
+    let result6 = '';
+    if ( property ){
+      for (let i = 0; i < property.length; i += 2) {
+        const twoBits = property.substr(i, 2);
+        const decimalValue = parseInt(twoBits, 2);
+        const formattedDecimal = decimalValue.toString().padStart(3, '0');
+        result6 += formattedDecimal;
+        if (i < property.length - 2) {
+          result6 += '.';
+        }
+      }
+    } else {
+      return [{ property: 'DNSセカンダリ', value: '不明' }];
+    }
+    return [{ property: 'DNSセカンダリ', value: result6 }];
   };
+  //未使用
   const processFunction7 = (property) => {
     return [{ property, value: "未使用" }];
   };
+  //未使用
   const processFunction8 = (property) => {
     return [{ property, value: "未使用" }];
   };
+  //未使用
   const processFunction9 = (property) => {
     return [{ property, value: "未使用" }];
   };
+  //未使用
   const processFunction10 = (property) => {
     return [{ property, value: "未使用" }];
   };
+  //未使用
   const processFunction11 = (property) => {
     return [{ property, value: "未使用" }];
   };
@@ -127,13 +161,22 @@ const IsmsComponent = () => {
     }
   };
   const processFunction13 = (property) => {
-    const result13 = [];
-    return result13;
+    if (property === "00") {
+      return [{ property: 'AUX優先順位エリア①店内', value: 'low' }];
+    } else if (property === "01") {
+      return [{ property: 'AUX優先順位エリア①店内', value: 'high' }];
+    } else {
+      return [{ property: 'AUX優先順位エリア①店内', value: '不明' }];
+    }
   };
   const processFunction14 = (property) => {
-    const result14 = [];
-
-    return result14;
+    if (property === "00") {
+      return [{ property: 'AUX優先順位エリア②事務所', value: 'low' }];
+    } else if (property === "01") {
+      return [{ property: 'AUX優先順位エリア②事務所', value: 'high' }];
+    } else {
+      return [{ property: 'AUX優先順位エリア②事務所', value: '不明' }];
+    }
   };
 
   // ここまで-----------------------------------------------------------
