@@ -28,8 +28,8 @@ const IsmsComponent = () => {
 
     const results = [];
 
-    for (let i = 0; i < 14 ; i++) {
-      const property = isms[i];
+    for (let i = 2; i < 14 ; i++) {
+      const property = isms[i+78];
       const func = ismsPropertyFunctions[i];
       const results2 = [];
 
@@ -77,9 +77,7 @@ const IsmsComponent = () => {
     return result2;
   };
   const processFunction3 = (property) => {
-    const result3 = [];
-
-    return result3;
+    return [{ property, value: "未使用" }];
   };
   const processFunction4 = (property) => {
     const result4 = [];
@@ -97,29 +95,19 @@ const IsmsComponent = () => {
     return result6;
   };
   const processFunction7 = (property) => {
-    const result7 = [];
-  
-    return result7;
+    return [{ property, value: "未使用" }];
   };
   const processFunction8 = (property) => {
-    const result8 = [];
-
-    return result8;
+    return [{ property, value: "未使用" }];
   };
   const processFunction9 = (property) => {
-    const result9 = [];
-    
-    return result9;
+    return [{ property, value: "未使用" }];
   };
   const processFunction10 = (property) => {
-    const result10 = [];
-
-    return result10;
+    return [{ property, value: "未使用" }];
   };
   const processFunction11 = (property) => {
-    const result11 = [];
-
-    return result11;
+    return [{ property, value: "未使用" }];
   };
   const processFunction12 = (property) => {
     const result12 = [];
