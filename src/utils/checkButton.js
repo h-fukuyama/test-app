@@ -1,27 +1,29 @@
 import { hexToBinary } from '../utils/calculate';
 
-export const checkButton = (property, buttonCount, buttonName) => {
+export const checkButton = (property, buttonCount, buttonDisplayName) => {
   const results = [];
+  // console.log(property);
   const binaryString = hexToBinary(property);
+  console.log(binaryString);
+  console.log(buttonCount);
+  console.log(buttonDisplayName);
 
   for (let i = 0; i < buttonCount; i++) {
     const bitValue = binaryString[i];
-    const buttonName = `ボタン${i + 1}`;
-    const result = { property: buttonName, value: bitValue === '0' ? '許可' : '禁止' };
+    const touchButtonName = `ボタン${i + 1}`;
+    const result = { property: touchButtonName, value: bitValue === '0' ? '許可' : '禁止' };
     results.push(result);
   }
-
   const deniedButtons = results.filter((result) => result.value === '禁止');
-  
   if (results.every((result) => result.value === '許可')) {
-    return [{ property: buttonName, value: '全て許可' }];
+    return [{ property: buttonDisplayName, value: '全て許可' }];
   } else if (results.every((result) => result.value === '禁止')) {
-    return [{ property: buttonName, value: '全て禁止' }];
+    return [{ property: buttonDisplayName, value: '全て禁止' }];
   }
 
   return deniedButtons;
-  // return [{ property: 'property', value: binaryString }]
- };
+};
+
 
 export const channelMask = (property, prefix) => {
   if (property) {

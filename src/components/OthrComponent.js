@@ -329,7 +329,6 @@ const OthrComponent = () => {
       }
   
       const deniedButtons = results31.filter((result) => result.value === '禁止');
-
       if (results31.every((result) => result.value === '許可')) {
         return [{ property: 'スタッフコール無線①', value: '全て許可' }];
       } else if (results31.every((result) => result.value === '禁止')) {

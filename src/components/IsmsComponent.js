@@ -38,7 +38,8 @@ const IsmsComponent = () => {
       else if ( i === 1 ) {
         for ( let j = 0x41; j <= 0x8E; j++ ) {
           const bgmBand = processIsmsBGMBand(j);
-          const result = processFunction2(property, bgmBand);
+          results2.push(processFunction2(property, bgmBand));
+          // console.log(results2);
           //results2.push(result);
         }
         results.push(results2);
@@ -75,11 +76,9 @@ const IsmsComponent = () => {
   };
   //チャンネルマスク
   const processFunction2 = (property, prefix) => {
-    console.log(property);
-    console.log(prefix);
-    const result2 = [];
-    result2.push(channelMask(property, prefix));
-    return result2;
+    // console.log(property);
+    // console.log(prefix);
+    return channelMask(property, prefix);
   };
   //未使用
   const processFunction3 = (property) => {

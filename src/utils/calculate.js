@@ -2,7 +2,7 @@ import bigInt from 'big-integer';
 
 // １６進数を２進数に変換するヘルパー関数
 export const hexToBinary = (hexString) => {
-  return (parseInt(hexString, 16).toString(2)).padStart(32, '0');
+  return parseInt(hexString, 16).toString(2).padStart(16, '0');
 };
 
 // 特定のビットがセットされているかを確認するヘルパー関数
