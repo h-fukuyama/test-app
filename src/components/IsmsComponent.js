@@ -4,7 +4,7 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
-import { processBGMBand } from '../utils/bgmBand';
+import { processIsmsBGMBand } from '../utils/bgmBand';
 import { hexToBinary, checkBit } from '../utils/calculate';
 import { channelMask } from '../utils/checkButton';
 
@@ -28,18 +28,22 @@ const IsmsComponent = () => {
     const results = [];
 
     for (let i = 0; i < 14 ; i++) {
-      const property = isms[i+77];
+      const property = isms[i];
       const func = ismsPropertyFunctions[i];
       const results2 = [];
 
-      if ( i === 1 ) {
-        for ( let j = 0x41; j < 0x5A; j++ ) {
-          const bgmBand = processBGMBand(j);
+      if( i === 0 ) {
+        results.push(func(property));
+      }
+      else if ( i === 1 ) {
+        for ( let j = 0x41; j <= 0x8E; j++ ) {
+          const bgmBand = processIsmsBGMBand(j);
           const result = processFunction2(property, bgmBand);
-          results2.push(result);
+          //results2.push(result);
         }
         results.push(results2);
       } else {
+        const property = isms[i+77];
         const result = func(property);
         results.push(result);
       }
@@ -71,6 +75,8 @@ const IsmsComponent = () => {
   };
   //チャンネルマスク
   const processFunction2 = (property, prefix) => {
+    console.log(property);
+    console.log(prefix);
     const result2 = [];
     result2.push(channelMask(property, prefix));
     return result2;
