@@ -30,17 +30,18 @@ export const channelMask = (property, prefix) => {
     });
 
     const binaryString = binaryArray.join('');
+    console.log(binaryString);
     const groupedResults = {};
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = binaryString.length - 1; i >= binaryString.length - 100; i--) {
       const bitValue = binaryString[i];
-      const buttonName = `${i + 1}`;
+      const buttonName = `${binaryString.length - i}`;
       const result = { property: buttonName, value: bitValue === '0' ? 'OFF' : 'ON' };
-
+    
       if (!groupedResults[result.value]) {
         groupedResults[result.value] = [];
       }
-
+    
       groupedResults[result.value].push(result);
     }
 
@@ -54,12 +55,12 @@ export const channelMask = (property, prefix) => {
       resultEntries = Object.entries(groupedResults)
         .filter(([value]) => value === 'ON')
         .map(([value, buttons]) => ({
-          property: `${prefix}チャンネルマスク(ONのみ表示): `,
+          property: `${prefix}チャンネルマスク(ONのみ表示) `,
           value: `${buttons.map((button) => button.property).join(', ')}`
         }));
     }
 
-    console.log(resultEntries);
+    // console.log(resultEntries);
     return resultEntries;
   } else {
     return [{ property: `${prefix}チャンネルマスク:`, value: '不明' }];
