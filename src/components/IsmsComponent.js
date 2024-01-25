@@ -37,10 +37,11 @@ const IsmsComponent = () => {
       }
       else if ( i === 1 ) {
         for ( let j = 0x41; j <= 0x8E; j++ ) {
+          const result = [];
           const bgmBand = processIsmsBGMBand(j);
-          results2.push(processFunction2(property, bgmBand));
-          // console.log(results2);
-          //results2.push(result);
+          // console.log(isms[j-0x40]);
+          results2.push(processFunction2(isms[j-0x40], bgmBand));
+          console.log(results2);
         }
         results.push(results2);
       } else {
@@ -76,9 +77,11 @@ const IsmsComponent = () => {
   };
   //チャンネルマスク
   const processFunction2 = (property, prefix) => {
-    // console.log(property);
-    // console.log(prefix);
-    return channelMask(property, prefix);
+    const channelMaskResult = channelMask(property, prefix);
+    return {
+      property: channelMaskResult[0].property,
+      value: Array.isArray(channelMaskResult) ? channelMaskResult[0].value : '不明'
+    };
   };
   //未使用
   const processFunction3 = (property) => {
@@ -186,6 +189,7 @@ const IsmsComponent = () => {
   // ここまで-----------------------------------------------------------
 
   const results_all = IsmsProcessor({ isms: fileContent?.if_config?.isms || [] });
+  console.log(results_all);
 
   return (
     <div>
@@ -200,7 +204,7 @@ const IsmsComponent = () => {
                 <div key={index} className="card">
                   <h4>{`Result ${index + 1}`}</h4>
                   <div style={{ marginBottom: '0.1em' }}>
-                    {result.map(({ property, value }) => (
+                    {typeof result === 'object' && result.map && result.map(({ property, value }) => (
                       <div
                         key={property}
                         className={`${value === '有効' ? 'underline' : ''} ${value === '未使用' ? 'line-through' : ''}`}

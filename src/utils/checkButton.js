@@ -4,9 +4,6 @@ export const checkButton = (property, buttonCount, buttonDisplayName) => {
   const results = [];
   // console.log(property);
   const binaryString = hexToBinary(property);
-  console.log(binaryString);
-  console.log(buttonCount);
-  console.log(buttonDisplayName);
 
   for (let i = 0; i < buttonCount; i++) {
     const bitValue = binaryString[i];
@@ -33,7 +30,6 @@ export const channelMask = (property, prefix) => {
     });
 
     const binaryString = binaryArray.join('');
-
     const groupedResults = {};
 
     for (let i = 0; i < 100; i++) {
@@ -48,21 +44,24 @@ export const channelMask = (property, prefix) => {
       groupedResults[result.value].push(result);
     }
 
+    let resultEntries = []; // 初期値を空の配列に設定
+
     if (Object.keys(groupedResults).length === 1 && 'ON' in groupedResults) {
-      return [{ property: `${prefix}チャンネルマスク`, value: '全てON' }];
+      resultEntries = [{ property: `${prefix}チャンネルマスク`, value: '全てON' }];
     } else if (Object.keys(groupedResults).length === 1 && 'OFF' in groupedResults) {
-      return [{ property: `${prefix}チャンネルマスク`, value: '全てOFF' }];
+      resultEntries = [{ property: `${prefix}チャンネルマスク`, value: '全てOFF' }];
+    } else {
+      resultEntries = Object.entries(groupedResults)
+        .filter(([value]) => value === 'ON')
+        .map(([value, buttons]) => ({
+          property: `${prefix}チャンネルマスク(ONのみ表示): `,
+          value: `${buttons.map((button) => button.property).join(', ')}`
+        }));
     }
 
-    const resultEntries = Object.entries(groupedResults)
-    .filter(([value]) => value === 'ON')
-    .map(([value, buttons]) => ({
-      property: `${prefix}チャンネルマスク(ONのみ表示): `,
-      value: `${buttons.map((button) => button.property).join(', ')}`
-    }));
-
+    console.log(resultEntries);
     return resultEntries;
   } else {
     return [{ property: `${prefix}チャンネルマスク:`, value: '不明' }];
   }
-}
+};
