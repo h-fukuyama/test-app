@@ -31,7 +31,6 @@ export const channelMask = (property, prefix) => {
     });
 
     const binaryString = binaryArray.join('');
-    console.log(binaryString);
     const groupedResults = {};
 
     for (let i = binaryString.length - 1; i >= binaryString.length - 100; i--) {
@@ -61,7 +60,6 @@ export const channelMask = (property, prefix) => {
         }));
     }
 
-    // console.log(resultEntries);
     return resultEntries;
   } else {
     return [{ property: `${prefix}チャンネルマスク:`, value: '不明' }];

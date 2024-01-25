@@ -39,9 +39,7 @@ const IsmsComponent = () => {
         for ( let j = 0x41; j <= 0x8E; j++ ) {
           const result = [];
           const bgmBand = processIsmsBGMBand(j);
-          // console.log(isms[j-0x40]);
           results2.push(processFunction2(isms[j-0x40], bgmBand));
-          // console.log(results2);
         }
         results.push(results2);
       } else {
@@ -189,7 +187,6 @@ const IsmsComponent = () => {
   // ここまで-----------------------------------------------------------
 
   const results_all = IsmsProcessor({ isms: fileContent?.if_config?.isms || [] });
-  // console.log(results_all);
 
   return (
     <div>
