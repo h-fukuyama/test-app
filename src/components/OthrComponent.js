@@ -321,13 +321,13 @@ const OthrComponent = () => {
       
       const binaryString = binaryArray.join('');
   
-      for (let i = 0; i < 400; i++) {
+      for (let i = 399; i >= 0; i--) {
         const bitValue = binaryString[i];
-        const buttonName = `ボタン${i + 101}`;
+        const buttonName = `ボタン${400 - i}`;
         const result = { property: buttonName, value: bitValue === '0' ? '許可' : '禁止' };
         results31.push(result);
       }
-  
+      
       const deniedButtons = results31.filter((result) => result.value === '禁止');
       if (results31.every((result) => result.value === '許可')) {
         return [{ property: 'スタッフコール無線①', value: '全て許可' }];
