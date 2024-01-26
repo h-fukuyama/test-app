@@ -16,12 +16,15 @@ function App() {
     <Router>
       <FileProvider>
         <Routes>
-          <Route path="/test-app" element={<FileInputScreen />} />
+          <Route path="/" element={<FileInputScreen />} />
           <Route path="/main" element={<MainComponent />} />
           <Route path="/sc" element={<ScComponent />} /> {/* 詳細表示が必要 */}
+            <Route path="/sc/:id" element={<ScComponent />} />
           <Route path="/menu" element={<MenuComponent />} /> {/* 詳細表示が必要 */} 
-          <Route path="/isms" element={<IsmsComponent />} /> {/* A~ZZまでのルールが煩雑になるようなら詳細表示が必要? */}
+            <Route path="/menu/:id" element={<ScComponent />} />
+          <Route path="/isms" element={<IsmsComponent />} />
           <Route path="/lt" element={<LtComponent />} /> {/* 詳細表示が必要 */}
+            <Route path="/lt/:id" element={<ScComponent />} />
           <Route path="/othr" element={<OthrComponent />} />
           <Route path="/reset" element={<ResetComponent />} />
         </Routes>

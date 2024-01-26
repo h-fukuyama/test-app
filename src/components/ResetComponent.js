@@ -9,7 +9,7 @@ const ResetComponent = () => {
 
   React.useEffect(() => {
     resetFile();
-    navigate('/test-app');
+    navigate('/');
   }, [resetFile, navigate]);
 
   return (
