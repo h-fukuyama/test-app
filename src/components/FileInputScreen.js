@@ -46,7 +46,7 @@ const FileInputScreen = () => {
         })}
       >
         <input {...getInputProps()} />
-        <p>JSONファイルをここにドラッグ&ドロップするか<br />クリックしてファイルを一つ選択してください。</p>
+        <p><b>JSONファイルをここにドラッグ&ドロップするか<br />クリックしてファイルを一つ選択してください。</b></p>
       </div>
       {renderHeader}
     </div>
