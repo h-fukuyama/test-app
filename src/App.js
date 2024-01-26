@@ -16,7 +16,7 @@ function App() {
     <Router>
       <FileProvider>
         <Routes>
-          <Route path="/" element={<FileInputScreen />} />
+          <Route path="/test-app" element={<FileInputScreen />} />
           <Route path="/main" element={<MainComponent />} />
           <Route path="/sc" element={<ScComponent />} /> {/* 詳細表示が必要 */}
           <Route path="/menu" element={<MenuComponent />} /> {/* 詳細表示が必要 */} 
