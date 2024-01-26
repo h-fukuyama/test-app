@@ -24,6 +24,40 @@
   color: white;
 }
 
+nav {
+  background-color: #333; /* ヘッダーの背景色 */
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+li {
+  margin-right: 20px; /* リンク間の余白 */
+}
+
+li:last-child {
+  margin-right: 0; /* 最後のリンクの余白をなくす */
+}
+
+a {
+  text-decoration: none;
+  color: white; /* リンクのテキスト色 */
+  font-weight: bold; /* リンクのテキストの太さ */
+}
+
+a:hover {
+  color: #ffcc00; /* ホバー時のリンクのテキスト色 */
+}
+
+.reset-link {
+  margin-left: auto;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -35,4 +69,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.card {
+  /*border: 2px solid black;*/
+  padding: 1em;
+  margin: 0.5em;
+  border-radius: 8px; /* 任意の角丸の半径を指定 */
+  width: 350px; /* カードの幅を指定 */
+  text-align: center; /* 中央寄せ */
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly; /* 要素間を均等にスペースを開ける */
 }
