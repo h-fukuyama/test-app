@@ -37,7 +37,6 @@ const IsmsComponent = () => {
       }
       else if ( i === 1 ) {
         for ( let j = 0x41; j <= 0x8E; j++ ) {
-          const result = [];
           const bgmBand = processIsmsBGMBand(j);
           results2.push(processFunction2(isms[j-0x40], bgmBand));
         }
