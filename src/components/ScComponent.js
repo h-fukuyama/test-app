@@ -22,7 +22,15 @@ const ScComponent = () => {
       if ( sc[i] === sc[i+22400] ) {
         if( sc[i] === '00' ){
           //sc[0],sc[44800]のファイル名を全て調査[44800]以降でなければ呼戻無
-          datasets.push([(i/56)+1,sc[i], sc[i+22400]]);
+          const dataset = [[sc[i + 1], sc[i + 5], sc[i + 9], sc[i + 13], sc[i + 17]], [sc[i + 22401], sc[i+22405], sc[i+22409], sc[i+22413], sc[i+22417]]];
+          const firstArrayValue = dataset[0].find(value => value !== "");
+          const secondArrayValue = dataset[1].find(value => value !== "");
+
+          if (firstArrayValue || secondArrayValue) {
+            datasets.push([ (i / 56) + 1, firstArrayValue || "<未登録>", secondArrayValue || "<未登録>"]);
+          } else {
+            datasets.push([ (i / 56) + 1, "<未登録>", "<未登録>"]);
+          }
         } else {
           //01~07毎の操作sc[44800]の操作も行う
           datasets.push([(i/56)+1,sc[i], sc[i+22400]]);
