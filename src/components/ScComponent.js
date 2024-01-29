@@ -18,9 +18,9 @@ const ScComponent = () => {
 
   const ScProcessor = ({ sc }) => {
     const datasets = [];
-    for( let i = 0; i <= 44744; i+=56 ) {
-      if ( sc[i] === '00' ) {
-        return datasets.push(["チャイム1", "チャイム2"]);
+    for( let i = 0; i <= 1; i+=56 ) {
+      if ( sc[i] && sc[i] === '00' ) {
+        datasets.push([(i/56)+1, "チャイム1", "チャイム2"]);
       } else if ( sc[i] === '01' ) {
         //return results_all.push()
       } else if ( sc[i] === '02' ) {
@@ -39,6 +39,7 @@ const ScComponent = () => {
 
       }
     }
+    console.log("datasets = " + datasets );
     return datasets;
   }
 
@@ -52,7 +53,12 @@ const ScComponent = () => {
           <h2>Sc Page</h2>
           <p>File Name: {file.type}</p>
           <h3>無線① WCシリーズ(400ペア)</h3>
-          <ScTable id={1} call={"チャイム１"} back={"チャイム2"} />
+          {/* すべてのテーブルを回す */}
+          {datasets.map((data, index) => (
+            <div key={index}>
+              <ScTable id={data[0]} call={data[1]} back={data[2]} />
+            </div>
+          ))}
           <h3>無線② UTW/WCシリーズ(1~16)</h3>
           <ScTable />
           <h3>有線(1~16)</h3>
