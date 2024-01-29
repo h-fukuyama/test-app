@@ -18,28 +18,27 @@ const ScComponent = () => {
 
   const ScProcessor = ({ sc }) => {
     const datasets = [];
-    for( let i = 0; i <= 1; i+=56 ) {
-      if ( sc[i] && sc[i] === '00' ) {
-        datasets.push([(i/56)+1, "チャイム1", "チャイム2"]);
-      } else if ( sc[i] === '01' ) {
-        //return results_all.push()
-      } else if ( sc[i] === '02' ) {
-        
-      } else if ( sc[i] === '03' ) {
-        
-      } else if ( sc[i] === '04' ) {
-        
-      } else if ( sc[i] === '05' ) {
-        
-      } else if ( sc[i] === '06' ) {
-        
-      } else if ( sc[i] === '07' ) {
-        
+    for( let i = 0; i < 22400; i+=56 ) {
+      if ( sc[i] === sc[i+22400] ) {
+        if( sc[i] === '00' ){
+          //sc[0],sc[44800]のファイル名を全て調査[44800]以降でなければ呼戻無
+          datasets.push([(i/56)+1,sc[i], sc[i+22400]]);
+        } else {
+          //01~07毎の操作sc[44800]の操作も行う
+          datasets.push([(i/56)+1,sc[i], sc[i+22400]]);
+        }
+      } else if ( sc[i] !== sc[i+22400] ) {
+        if ( sc[i] === '00' ) {
+          //あり得ないので"該当ボタンエラー"
+          datasets.push([(i/56)+1,sc[i], sc[i+22400]]);
+        } else {
+          //01~07毎の操作sc[44800]の操作は行わず＜未設定＞
+          datasets.push([(i/56)+1,sc[i], sc[i+22400]]);        }
       } else {
-
+        //分岐以外
+        datasets.push([(i/56)+1,"不明", "不明"]);
       }
     }
-    console.log("datasets = " + datasets );
     return datasets;
   }
 
