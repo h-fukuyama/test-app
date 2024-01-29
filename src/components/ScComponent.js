@@ -3,7 +3,9 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
-import ScTable from '../utils/scTable';
+// import { processTypeOne processType02, processType03, processType04, processType05, processType06, processType07 } from '../utils/sc/scComponentFunction';
+import { processTypeOne } from '../utils/sc/scComponentFunction';
+import ScTable from '../utils/sc/scTable';
 
 const ScComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -18,6 +20,7 @@ const ScComponent = () => {
 
   const ScProcessor = ({ sc }) => {
     const datasets = [];
+
     for( let i = 0; i < 22400; i+=56 ) {
       if ( sc[i] === sc[i+22400] ) {
         if( sc[i] === '00' ){
@@ -32,8 +35,29 @@ const ScComponent = () => {
             datasets.push([ (i / 56) + 1, "<未登録>", "<未登録>"]);
           }
         } else {
-          //01~07毎の操作sc[44800]の操作も行う
-          datasets.push([(i/56)+1,sc[i], sc[i+22400]]);
+          //01~07毎の操作,sc[44800]の操作も行う
+          if( sc[i] === '01' ){
+            const dataset = [i, sc[i+33], sc[i+22433]];
+            const replacedValue1 = replaceValue(dataset[1]);
+            const replacedValue2 = replaceValue(dataset[2]);
+          
+            return [(i / 56) + 1, replacedValue1, replacedValue2];
+          } else if( sc[i] === '02' ){
+            
+          } else if( sc[i] === '03' ){
+            
+          } else if( sc[i] === '04' ){
+            
+          } else if( sc[i] === '05' ){
+            
+          } else if( sc[i] === '06' ){
+            
+          } else if( sc[i] === '07' ){
+            
+          } else {
+            datasets.push([(i/56)+1,sc[i], sc[i+22400]]);
+          }          
+
         }
       } else if ( sc[i] !== sc[i+22400] ) {
         if ( sc[i] === '00' ) {
@@ -49,7 +73,18 @@ const ScComponent = () => {
     }
     return datasets;
   }
-
+  function replaceValue(value) {
+    switch (value) {
+      case '00':
+        return "電源ON⇔OFF";
+      case '01':
+        return "電源ON";
+      case '02':
+        return "電源OFF";
+      default:
+        return value; // 何も該当しない場合は元の値をそのまま返す
+    }
+  }
   const datasets = ScProcessor({ sc: fileContent?.if_config?.sc || [] });
 
   return (

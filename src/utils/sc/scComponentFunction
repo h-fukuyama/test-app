@@ -1,0 +1,45 @@
+export const processTypeOne = (dataset, i) => {
+    const replacedValue1 = replaceValue(dataset[1]);
+    const replacedValue2 = replaceValue(dataset[2]);
+  
+    return [(i / 56) + 1, replacedValue1, replacedValue2];
+}
+
+  function replaceValue(value) {
+    switch (value) {
+      case '00':
+        return "電源ON⇔OFF";
+      case '01':
+        return "電源ON";
+      case '02':
+        return "電源OFF";
+      default:
+        return value; // 何も該当しない場合は元の値をそのまま返す
+    }
+  }
+
+
+// export function processType02(dataset, i) {
+//   // Type 02 の処理を実装
+// }
+
+// export function processType03(dataset, i) {
+//   // Type 03 の処理を実装
+// }
+
+// export function processType04(dataset, i) {
+//     const newDataset = [sc[i + 33], sc[i + 22433]];
+//     // ここで newDataset に対する処理を行う（datasets に push など）
+// }
+
+// export function processType05(dataset, i) {
+// // Type 02 の処理を実装
+// }
+
+// export function processType06(dataset, i) {
+// // Type 03 の処理を実装
+// }
+
+// export function processType07(dataset, i) {
+// // Type 03 の処理を実装
+// }
