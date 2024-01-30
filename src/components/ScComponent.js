@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
 // import { processTypeOne processType02, processType03, processType04, processType05, processType06, processType07 } from '../utils/sc/scComponentFunction';
-import { processTypeOne } from '../utils/sc/scComponentFunction';
+import  replaceValue  from '../utils/sc/scComponentFunction';
 import ScTable from '../utils/sc/scTable';
 
 const ScComponent = () => {
@@ -36,13 +36,12 @@ const ScComponent = () => {
           }
         } else {
           //01~07毎の操作,sc[44800]の操作も行う
-          if( sc[i] === '01' ){
+          if( sc[i] === '01' ){ //電源制御
             const dataset = [i, sc[i+33], sc[i+22433]];
             const replacedValue1 = replaceValue(dataset[1]);
             const replacedValue2 = replaceValue(dataset[2]);
-          
-            return [(i / 56) + 1, replacedValue1, replacedValue2];
-          } else if( sc[i] === '02' ){
+            datasets.push([(i / 56) + 1, replacedValue1, replacedValue2]);
+          } else if( sc[i] === '02' ){ //チャンネル変更
             
           } else if( sc[i] === '03' ){
             
@@ -73,18 +72,7 @@ const ScComponent = () => {
     }
     return datasets;
   }
-  function replaceValue(value) {
-    switch (value) {
-      case '00':
-        return "電源ON⇔OFF";
-      case '01':
-        return "電源ON";
-      case '02':
-        return "電源OFF";
-      default:
-        return value; // 何も該当しない場合は元の値をそのまま返す
-    }
-  }
+  
   const datasets = ScProcessor({ sc: fileContent?.if_config?.sc || [] });
 
   return (
