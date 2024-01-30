@@ -6,6 +6,10 @@ export const replaceValue = (value) => {
         return "ON";
       case '02':
         return "OFF";
+      case '03' :
+        return "ワンショット";
+      case '04' :
+        return "秒数指定";    
       default:
         return value; // 何も該当しない場合は元の値をそのまま返す
     }

@@ -50,8 +50,8 @@ const ScComponent = () => {
             datasets.push([ (i/56)+1, `BGM/CMカット ${generateOutput(sc[i+46])}`, `BGM/CMカット ${generateOutput(sc[i+22446])}`]);
           } else if( sc[i] === '04' ){ //ワンタッチボタン(外部制御の操作はdetailで行う)
             datasets.push( [(i/56)+1, `ワンタッチボタン${sc[i+47] === '00' ? "<未設定>" : parseInt(sc[i+47],16)} ${replaceValue(sc[i+48])}`,`ワンタッチボタン${sc[i+22447] === '00' ? "<未設定>" : parseInt(sc[i+22447],16)} ${replaceValue(sc[i+22448])}`])
-          } else if( sc[i] === '05' ){
-            
+          } else if( sc[i] === '05' ){ //外部制御(メーク時間などはdetailで行う)
+            datasets.push( [(i/56)+1, `外部制御${parseInt(sc[i+49],16)} ${replaceValue(sc[i+50])}`, `外部制御${parseInt(sc[i+22449],16)} ${replaceValue(sc[i+22450])}`])
           } else if( sc[i] === '06' ){
             
           } else if( sc[i] === '07' ){
