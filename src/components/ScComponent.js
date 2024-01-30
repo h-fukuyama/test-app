@@ -30,22 +30,17 @@ const ScComponent = () => {
           const dataset = [[sc[i + 1], sc[i + 5], sc[i + 9], sc[i + 13], sc[i + 17]], [sc[i + 22401], sc[i+22405], sc[i+22409], sc[i+22413], sc[i+22417]]];
           const firstArrayValue = dataset[0].find(value => value !== "");
           const secondArrayValue = dataset[1].find(value => value !== "");
-
           if (firstArrayValue || secondArrayValue) {
             datasets.push([ (i / 56) + 1, firstArrayValue || "<未登録>", secondArrayValue || "<未登録>"]);
-          } else {
-            datasets.push([ (i / 56) + 1, "<未登録>", "<未登録>"]);
-          }
+          } else datasets.push([ (i / 56) + 1, "<未登録>", "<未登録>"]);
         } else {
           //01~07毎の操作,sc[44800]の操作も行う
           if( sc[i] === '01' ){ //電源制御
             const dataset = [i, sc[i+33], sc[i+22433]];
-            datasets.push([(i / 56) + 1, replaceValue(dataset[1]), replaceValue(dataset[2])]);
+            datasets.push([(i / 56) + 1, `電源${replaceValue(dataset[1])}`, `電源${replaceValue(dataset[2])}`]);
           } else if( sc[i] === '02' ){ //チャンネル変更(外部制御の操作はdetailで行う)
             if( sc[i+34] === '00' ) { //BGM
-              const band = processBGMBand(sc[i+37]);
-              const channel = parseInt(sc[i+38],16);
-              datasets.push([ (i/56)+1, `チャンネル変更 ${band}${channel}`, "ユーザ設定不可" ]);
+              datasets.push([ (i/56)+1, `チャンネル変更 ${processBGMBand(sc[i+37])}${parseInt(sc[i+38],16)}`, "ユーザ設定不可" ]);
             } else if( sc[i+34] === '01' ) { //プログラム
               datasets.push([(i/56)+1, sc[i+35] >= '00' && sc[i+35] <= '05' ? "チャンネル変更 <未設定>" : `チャンネル変更 ${sc[i+35]}`, "ユーザ設定不可"]);
             } else if( sc[i+34]==='02' ) { //radiko
@@ -53,8 +48,8 @@ const ScComponent = () => {
             } else datasets.push([(i/56)+1, "不明", "ユーザ設定不可" ]);
           } else if( sc[i] === '03' ){ //BGM/CMカット
             datasets.push([ (i/56)+1, `BGM/CMカット ${generateOutput(sc[i+46])}`, `BGM/CMカット ${generateOutput(sc[i+22446])}`]);
-          } else if( sc[i] === '04' ){
-            
+          } else if( sc[i] === '04' ){ //ワンタッチボタン(外部制御の操作はdetailで行う)
+            datasets.push( [(i/56)+1, `ワンタッチボタン${sc[i+47] === '00' ? "<未設定>" : parseInt(sc[i+47],16)} ${replaceValue(sc[i+48])}`,`ワンタッチボタン${sc[i+22447] === '00' ? "<未設定>" : parseInt(sc[i+22447],16)} ${replaceValue(sc[i+22448])}`])
           } else if( sc[i] === '05' ){
             
           } else if( sc[i] === '06' ){
