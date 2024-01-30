@@ -9,30 +9,13 @@ export const replaceValue = (value) => {
       default:
         return value; // 何も該当しない場合は元の値をそのまま返す
     }
-}
+};
 
-
-// export function processType02(dataset, i) {
-//   // Type 02 の処理を実装
-// }
-
-// export function processType03(dataset, i) {
-//   // Type 03 の処理を実装
-// }
-
-// export function processType04(dataset, i) {
-//     const newDataset = [sc[i + 33], sc[i + 22433]];
-//     // ここで newDataset に対する処理を行う（datasets に push など）
-// }
-
-// export function processType05(dataset, i) {
-// // Type 02 の処理を実装
-// }
-
-// export function processType06(dataset, i) {
-// // Type 03 の処理を実装
-// }
-
-// export function processType07(dataset, i) {
-// // Type 03 の処理を実装
-// }
+export const generateOutput = (input) => {
+    const settingValue = {
+        '00': 'カット⇔解除',
+        '01': 'カット',
+        '02': '解除',
+    }[input] || '不明';
+    return settingValue;
+};
