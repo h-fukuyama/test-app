@@ -6,6 +6,7 @@ import useFileContent from '../utils/useFileContent';
 // import { processTypeOne processType02, processType03, processType04, processType05, processType06, processType07 } from '../utils/sc/scComponentFunction';
 import  replaceValue  from '../utils/sc/scComponentFunction';
 import ScTable from '../utils/sc/scTable';
+import  { processBGMBand } from '../utils/bgmBand';
 
 const ScComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -42,7 +43,15 @@ const ScComponent = () => {
             const replacedValue2 = replaceValue(dataset[2]);
             datasets.push([(i / 56) + 1, replacedValue1, replacedValue2]);
           } else if( sc[i] === '02' ){ //チャンネル変更
-            
+            if( sc[i+34] === '00' ) { //BGM
+              const band = processBGMBand(sc[i+37]);
+              const channel = parseInt(sc[i+38],16);
+              datasets.push([ (i/56)+1, `チャンネル変更 ${band}${channel}`, "ユーザ設定不可" ]);
+            } else if( sc[i+34] === '01' ) { //プログラム
+              datasets.push([(i/56)+1, sc[i+35] >= '00' && sc[i+35] <= '05' ? "チャンネル変更 <未設定>" : `チャンネル変更 ${sc[i+35]}`, "ユーザ設定不可"]);
+            } else if( sc[i+34]==='02' ) { //radiko
+              datasets.push([(i/56)+1, `チャンネル変更 ${sc[i+36]}`, "ユーザ設定不可" ])
+            } else datasets.push([(i/56)+1, "不明", "ユーザ設定不可" ]);
           } else if( sc[i] === '03' ){
             
           } else if( sc[i] === '04' ){
