@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+// ScComponent.js
+
+import React, { useEffect, useRef } from 'react';
 import { useFileContext } from '../context/FileContext';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
@@ -7,8 +9,8 @@ import { getActionResult } from '../utils/sc/scComponentFunction';
 import ScTable from '../utils/sc/scTable';
 
 const ScComponent = () => {
-  const { file } = useFileContext(); //fileとsetFileContextを取得
-  const { fileContent } = useFileContent(file); //fileのファイルの内容を読み込む
+  const { file } = useFileContext();
+  const { fileContent } = useFileContent(file);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const ScComponent = () => {
   }, [file, navigate]);
 
   const ScProcessor = ({ sc }) => {
-    const datasets = [];  
+    const datasets = [];
     for (let i = 0; i < 22400; i += 56) {
       const isSameButton = sc[i] === sc[i + 22400];
       if (isSameButton) {
@@ -34,36 +36,50 @@ const ScComponent = () => {
           secondArrayValue || "<未登録>",
         ]);
       } else {
-        const actionResult = getActionResult(sc, i); 
+        const actionResult = getActionResult(sc, i);
         datasets.push([(i / 56) + 1, ...actionResult]);
       }
     }
     return datasets;
-  }; 
-  
+  };
+
   const datasets = ScProcessor({ sc: fileContent?.if_config?.sc || [] });
+
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+  const wireless1Ref = useRef(null);
+  const wireless2Ref = useRef(null);
+  const wiredRef = useRef(null);
 
   return (
     <div>
-      {file && ( //fileが存在すれば以下を表示
+      {file && (
         <div>
           <Header />
-          <h2>Sc Page</h2>
-          <p>File Name: {file.type}</p>
-          <h3>無線① WCシリーズ(400ペア)</h3>
-          {/* すべてのテーブルを回す */}
-          {datasets.map((data, index) => (
-            <div key={index}>
-              <ScTable id={data[0]} call={data[1]} back={data[2]} />
-            </div>
-          ))}
-          <h3>無線② UTW/WCシリーズ(1~16)</h3>
-          <ScTable />
-          <h3>有線(1~16)</h3>
-          <ScTable />
+          <div id="sidebar">
+            {/* サイドバー */}
+            <ul><b>
+              <li onClick={() => scrollToRef(wireless1Ref)}>無線① WCシリーズ</li>
+              <li onClick={() => scrollToRef(wireless2Ref)}>無線② UTW/WCシリーズ</li>
+              <li onClick={() => scrollToRef(wiredRef)}>有線</li>
+            </b></ul>
+          </div>
+          <div id="main-content">
+            <h2 ref={wireless1Ref}>Sc Page</h2>
+            <p>File Name: {file.type}</p>
+            <h3>無線① WCシリーズ(400ペア)</h3>
+            {datasets.map((data, index) => (
+              <div key={index}>
+                <ScTable id={data[0]} call={data[1]} back={data[2]} />
+              </div>
+            ))}
+            <h3 ref={wireless2Ref}>無線② UTW/WCシリーズ(1~16)</h3>
+            <ScTable />
+            <h3 ref={wiredRef}>有線(1~16)</h3>
+            <ScTable />
+          </div>
         </div>
       )}
-      {!file && <h2>Sc Page</h2>} {/* fileが存在しなければタイトルだけ表示（/に遷移するとかでもよさそう) */}
+      {!file && <h2>Sc Page</h2>}
     </div>
   );
 };

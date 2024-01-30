@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     return (
         <nav>
-            <ul>
+            <ul style={{ display: 'flex', alignItems: 'center' }}>
                 <li><Link to="/main">main</Link></li>
                 <li><Link to="/sc">sc(スタッフコール)</Link></li>
                 <li><Link to="/menu">menu</Link></li>
