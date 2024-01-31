@@ -39,7 +39,7 @@ export const replaceVolume = (value) => {
     }
 };
 
-export const getActionResult = (sc, i) => {
+export const getActionResult1 = (sc, i) => {
     switch (sc[i]) {
       case '01':
         return [
@@ -71,3 +71,46 @@ export const getActionResult = (sc, i) => {
         return [sc[i], sc[i + 22400]];
     }
   };
+
+  export const getActionResult2 = (sc, i) => {
+    switch (sc[i]) {
+      case '01':
+        const firstElement = `電源${replaceValue(sc[i + 33])}`;
+        const secondElement = sc[i + 448] !== undefined ? `電源${replaceValue(sc[i + 448])}` : "";
+        return [firstElement, secondElement];
+        
+      case '02':
+        const firstElement2 = `チャンネル変更 ${processBGMBand(sc[i + 37])}${parseInt(sc[i + 38], 16)}`;
+        const secondElement2 = "ユーザ設定不可";
+        return [firstElement2, secondElement2];
+      
+      case '03':
+        const firstElement3 = `BGM/CMカット ${generateOutput(sc[i + 46])}`;
+        const secondElement3 = `BGM/CMカット ${generateOutput(sc[i + 494])}`;
+        return [firstElement3, secondElement3];
+      
+      case '04':
+        const firstElement4 = `ワンタッチボタン${parseInt(sc[i + 47], 16)} ${replaceValue(sc[i + 48])}`;
+        const secondElement4 = sc[i + 448] !== undefined ? `ワンタッチボタン${parseInt(sc[i + 448], 16)} ${replaceValue(sc[i + 496])}` : "";
+        return [firstElement4, secondElement4];
+      
+      case '05':
+        const firstElement5 = `外部制御${parseInt(sc[i + 49], 16)} ${replaceValue(sc[i + 50])}`;
+        const secondElement5 = sc[i + 448] !== undefined ? `外部制御${parseInt(sc[i + 448], 16)} ${replaceValue(sc[i + 498])}` : "";
+        return [firstElement5, secondElement5];
+      
+      case '06':
+        const firstElement6 = `ボリューム ${replaceVolume(sc[i + 53])}`;
+        const secondElement6 = sc[i + 448] !== undefined ? `ボリューム ${replaceVolume(sc[i + 501])}` : "";
+        return [firstElement6, secondElement6];
+      
+      case '07':
+        const firstElement7 = `AUX ${replaceValue(sc[i + 55])}`;
+        const secondElement7 = sc[i + 448] !== undefined ? `AUX ${replaceValue(sc[i + 503])}` : "";
+        return [firstElement7, secondElement7];
+      
+      default:
+        return [sc[i], sc[i + 22400]];
+    }
+  };
+  

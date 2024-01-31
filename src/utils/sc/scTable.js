@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ScTable = ({ id, call, back }) => {
+export const ScTable1 = ({ id, button, call, back }) => {
     return (
         <table align='center'>
             <tr text-align='center'>
@@ -17,7 +17,7 @@ const ScTable = ({ id, call, back }) => {
             </tr>
             <tr>
                 <td></td>
-                <td>{id+100}</td>
+                <td>{button}</td>
                 <td>呼戻</td>
                 <td><b>{back}</b></td>
             </tr>
@@ -25,4 +25,19 @@ const ScTable = ({ id, call, back }) => {
     )
 };
 
-export default ScTable;
+export const ScTable2 = ({ id, call }) => {
+    return (
+        <table align='center'>
+            <tr text-align='center'>
+                <td width="100px" textAlign="center">{id}.</td>
+                <td width="100px">ボタン{id}</td>
+                <td width="500px"><b>{call}</b></td>
+                <td width="150px">
+                    <Link to={`/scDetail/${id}`}>
+                        <button className="detail-button">詳細表示</button>
+                    </Link>
+                </td>
+            </tr>
+        </table>
+    )
+};
