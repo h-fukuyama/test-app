@@ -10,7 +10,7 @@ export const ScTable1 = ({ id, button, call, back }) => {
                 <td width="100px">呼出</td>
                 <td width="600px"><b>{call}</b></td>
                 <td width="150px" rowSpan={2}>
-                    <Link to={`/scDetail/${id}`}>
+                    <Link to={`/sc/${id}`}>
                         <button className="detail-button">詳細表示</button>
                     </Link>
                 </td>
@@ -33,7 +33,7 @@ export const ScTable2 = ({ id, call }) => {
                 <td width="100px">ボタン{id}</td>
                 <td width="500px"><b>{call}</b></td>
                 <td width="150px">
-                    <Link to={`/scDetail/${id}`}>
+                    <Link to={`/sc/${id}`}>
                         <button className="detail-button">詳細表示</button>
                     </Link>
                 </td>
