@@ -55,6 +55,43 @@ export const mapFolderValue = (value) => {
   }
 };
 
+export const BinaryConverter = ( input ) => {
+  const binaryString = (+input).toString(2);
+  const reversedBinaryArray = binaryString.split('').reverse();
+
+  const output = reversedBinaryArray.map((bit, index) => {
+    if (bit === '1') {
+      switch (index) {
+        case 0:
+          return '店内';
+        case 1:
+          return '事務所';
+        case 2:
+          return 'インカム';
+        // 他のビットに対する処理も追加
+        default:
+          return '';
+      }
+    }
+    return '';
+  });
+
+  return output;
+}
+
+export const replaceControl = (value) => {
+  switch (value) {
+    case '03':
+      return "ワンショット";
+    case '04':
+      return "秒数指定";
+    case '05':
+      return "再生中";  
+    default:
+      return value; // 何も該当しない場合は元の値をそのまま返す
+  }
+};
+
 export const getActionResult1 = (sc, i) => {
     switch (sc[i]) {
       case '01':

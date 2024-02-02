@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Routes, Route, Link,  } from 'react-router-dom';
 
 export const ScTable1 = ({ id, button, call, back }) => {
     return (
@@ -10,7 +10,7 @@ export const ScTable1 = ({ id, button, call, back }) => {
                 <td width="100px">呼出</td>
                 <td width="600px"><b>{call}</b></td>
                 <td width="150px" rowSpan={2}>
-                    <Link to={`/sc/${id}`}>
+                <Link to={{ pathname: `/sc/${id}`, state: { back } }}>
                         <button className="detail-button">詳細表示</button>
                     </Link>
                 </td>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ScDetailTable1 = ({fileName, folder, volume, mixing}) => {
+export const ScDetailTable1 = ({fileName, folder, volume, mixing, output, repeat, external, channel, params}) => {
     return (
         <table align='center'>
             <tr text-align='center'>
@@ -51,39 +51,43 @@ export const ScDetailTable1 = ({fileName, folder, volume, mixing}) => {
             <tr>
                 <td>出力先</td>
                 <td></td>
-                <td>エリア１(変数)</td>
-                <td>エリア２(変数)</td>
-                <td>インカム３(変数)</td>
+                <td>{output[0]}</td>
+                <td>{output[1]}</td>
+                <td>{output[2]}</td>
+            </tr>
+            <tr>
+                <td colSpan={1}>リピート感覚</td>
+                <td colSpan={4}>{repeat}秒</td>
             </tr>
             <tr>
                 <td colSpan={1}>外部出力</td>
-                <td colSpan={4}>利用する/利用しない(変数)</td>
+                <td colSpan={4}>{external[0]}</td>
             </tr>
             <tr>
                 <td>出力先</td>
-                <td>出力先(変数)</td>
+                <td>{external[1]}</td>
                 <td colSpan={3}>(外部制御1~16)</td>
             </tr>
             <tr>
                 <td>動作</td>
-                <td colSpan={4}>動作(変数)</td>
+                <td colSpan={4}>{external[2]}</td>
             </tr>
             <tr>
                 <td>秒数</td>
-                <td colSpan={3}>秒数(変数)</td>
+                <td colSpan={3}>{external[3]}秒</td>
                 <td>(1~99秒)</td>
             </tr>
             <tr>
                 <td>ch変更</td>
-                <td colSpan={4}>利用する/しない</td>
+                <td colSpan={4}>{channel[0]}</td>
             </tr>
             <tr>
                 <td>チャンネル</td>
-                <td colSpan={4}>チャンネル名(変数)</td>
+                <td colSpan={4}>{channel[1]}</td>
             </tr>
             <tr>
                 <td>呼び戻し</td>
-                <td colSpan={4}>利用する/しない(変数)</td>
+                <td colSpan={4}>{params}</td>
             </tr>
         </table>
     )
