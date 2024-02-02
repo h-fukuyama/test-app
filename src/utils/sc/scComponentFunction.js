@@ -39,6 +39,22 @@ export const replaceVolume = (value) => {
     }
 };
 
+export const mapFolderValue = (value) => {
+  switch (value) {
+    case '00':
+      return '未設定';
+    case '30':
+      return 'センタCM';
+    case '31':
+      return 'オリジナル録音';
+    case '32':
+      return '取り込み音源';
+    // 他にも条件があれば追加
+    default:
+      return value; // マッチしない場合は元の値を返す
+  }
+};
+
 export const getActionResult1 = (sc, i) => {
     switch (sc[i]) {
       case '01':
