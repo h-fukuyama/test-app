@@ -3,8 +3,8 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
-import { ScDetailTable1 } from '../utils/sc/ScDetailTable';
-import { BinaryConverter, mapFolderValue, replaceControl } from '../utils/sc/scComponentFunction';
+import { ScDetailTable0, ScDetailTable1 } from '../utils/sc/ScDetailTable';
+import { BinaryConverter, mapFolderValue, replaceControl, replaceValue } from '../utils/sc/scComponentFunction';
 import { hexToSignedDecimal } from '../utils/calculate';
 import { processBGMBand } from '../utils/bgmBand';
 
@@ -25,7 +25,7 @@ const ScDetail = () => {
 
 const ScDetailProcessor = ({ sc,id }) => {
     switch (sc[startIndex]) {
-        case '00':          
+        case '00': //コメント再生         
             const fileName = [sc[startIndex+1],sc[startIndex+5],sc[startIndex+9],sc[startIndex+13],sc[startIndex+17]];
             const folder = [sc[startIndex+2],sc[startIndex+6],sc[startIndex+10],sc[startIndex+14],sc[startIndex+18]];
             const transformedFolder = folder.map(mapFolderValue);
@@ -51,20 +51,20 @@ const ScDetailProcessor = ({ sc,id }) => {
             })();
             channel.push(channelName);
             console.log(params);
-            return <ScDetailTable1 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} repeat={repeat} external={external} channel={channel} params={params}/>;
-        case '01':
-            return sc;
-        case '02':
+            return <ScDetailTable0 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} repeat={repeat} external={external} channel={channel} params={params}/>;
+        case '01': //電源制御:1行
+            return <ScDetailTable1 power={replaceValue(sc[startIndex+33])} />
+        case '02': //チャンネル変更:9行
             return sc;        
-        case '03':
+        case '03': //カット制御:4行
             return sc;        
-        case '04':
+        case '04': //ワンタッチボタン:2行
             return sc;        
-        case '05':
+        case '05': //外部制御:3行
             return sc;        
-        case '06':
+        case '06': //音量3行
             return sc;        
-        case '07':
+        case '07': //AUX:1行
           return sc;
         
         default:

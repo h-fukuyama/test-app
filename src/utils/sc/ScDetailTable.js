@@ -1,8 +1,7 @@
 import React from 'react';
 import { useLocation  } from 'react-router-dom';
 
-
-export const ScDetailTable1 = ({fileName, folder, volume, mixing, output, repeat, external, channel, params}) => {
+export const ScDetailTable0 = ({fileName, folder, volume, mixing, output, repeat, external, channel, params}) => {
     const location=useLocation();
     console.log(`ScDetailTable1でのlocation: ${location}`);
     const rowHeaders = ["前チャイム", "コメント①", "コメント②", "コメント③", "後チャイム"];
@@ -79,6 +78,24 @@ export const ScDetailTable1 = ({fileName, folder, volume, mixing, output, repeat
                     </tr>
                 </>
             )}
+        </table>
+    )
+};
+
+export const ScDetailTable1 = ({power}) => {
+    return (
+      <table align='center'>
+          <tr text-align='center'>
+            <td colSpan={5}><b>電源ON/OFF</b></td>
+          </tr>
+          <tr>
+            <td>動作</td>
+            <td>{power}</td>
+          </tr>
+          <tr>
+            <td>呼戻し</td>
+            <td>(変数)</td>
+          </tr>
         </table>
     )
 };
