@@ -53,7 +53,7 @@ const ScDetailProcessor = ({ sc,id }) => {
             console.log(params);
             return <ScDetailTable0 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} repeat={repeat} external={external} channel={channel} params={params}/>;
         case '01': //電源制御:1行
-            return <ScDetailTable1 power={replaceValue(sc[startIndex+33])} />
+            return <ScDetailTable1 title="電源ON/OFF" power={replaceValue(sc[startIndex+33])} />
         case '02': //チャンネル変更:9行
             return sc;        
         case '03': //カット制御:4行
@@ -65,8 +65,7 @@ const ScDetailProcessor = ({ sc,id }) => {
         case '06': //音量3行
             return sc;        
         case '07': //AUX:1行
-          return sc;
-        
+            return <ScDetailTable1 title="AUX" power={replaceValue(sc[startIndex+55])} />        
         default:
           return [sc[id], sc[id + 22400]];
       }
@@ -81,7 +80,7 @@ const ScDetailProcessor = ({ sc,id }) => {
         <div>
           <Header />
           <h2>Sc Detail Page</h2>
-          <p>mode: {fileContent?.if_config?.sc[startIndex]}</p>
+          <h3>ボタン: {Number(id)+100}の詳細</h3>
           {fileContent && (
               <div>
                 {tableSet}

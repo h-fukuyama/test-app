@@ -82,11 +82,11 @@ export const ScDetailTable0 = ({fileName, folder, volume, mixing, output, repeat
     )
 };
 
-export const ScDetailTable1 = ({power}) => {
+export const ScDetailTable1 = ({title, power}) => {
     return (
       <table align='center'>
           <tr text-align='center'>
-            <td colSpan={5}><b>電源ON/OFF</b></td>
+            <td colSpan={5}><b>{title}</b></td>
           </tr>
           <tr>
             <td>動作</td>
