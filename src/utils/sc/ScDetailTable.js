@@ -121,3 +121,29 @@ export const ScDetailTable4 = ({button, control}) => {
         </table>
     )
 };
+
+export const ScDetailTable5 = ({external2}) => {
+    return (
+      <table align='center'>
+          <tr text-align='center'>
+            <td colSpan={3}><b>外部制御</b></td>
+          </tr>
+          <tr>
+            <td>出力先</td>
+            <td>{external2[0]}</td>
+            <td>(外部制御1~16)</td>
+        </tr>
+        <tr>
+            <td>動作</td>
+            <td colSpan={2}>{external2[1]}</td>
+        </tr>
+        {external2[1] !== "秒数指定" && (
+        <tr>
+            <td>秒数</td>
+            <td>{external2[2]}秒</td>
+            <td>(1~99秒)</td>
+        </tr>
+        )}
+        </table>
+    )
+};
