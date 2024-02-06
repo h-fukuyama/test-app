@@ -14,7 +14,7 @@ const ScDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  const params = location.params;
+  const params = location.key;
   const startIndex = ( id - 1 ) * 56;
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const ScDetail = () => {
 
 const ScDetailProcessor = ({ sc,id }) => {
     switch (sc[startIndex]) {
-        case '00':
+        case '00':          
             const fileName = [sc[startIndex+1],sc[startIndex+5],sc[startIndex+9],sc[startIndex+13],sc[startIndex+17]];
             const folder = [sc[startIndex+2],sc[startIndex+6],sc[startIndex+10],sc[startIndex+14],sc[startIndex+18]];
             const transformedFolder = folder.map(mapFolderValue);

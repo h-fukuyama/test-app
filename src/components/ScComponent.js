@@ -12,6 +12,7 @@ const ScComponent = () => {
   const { file } = useFileContext();
   const { fileContent } = useFileContent(file);
   const navigate = useNavigate();
+  // const location = useLocation();
 
   useEffect(() => {
     if (!file) {
@@ -40,6 +41,7 @@ const ScComponent = () => {
         datasets.push([(i / 56) + 1, ...actionResult]);
       }
     }
+    // console.log(location);
     return datasets;
   };
 
