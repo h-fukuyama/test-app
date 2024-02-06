@@ -86,11 +86,33 @@ export const ScDetailTable1 = ({title, power}) => {
     return (
       <table align='center'>
           <tr text-align='center'>
-            <td colSpan={5}><b>{title}</b></td>
+            <td colSpan={2}><b>{title}</b></td>
           </tr>
           <tr>
             <td>動作</td>
             <td>{power}</td>
+          </tr>
+          <tr>
+            <td>呼戻し</td>
+            <td>(変数)</td>
+          </tr>
+        </table>
+    )
+};
+
+export const ScDetailTable4 = ({button, control}) => {
+    return (
+      <table align='center'>
+          <tr text-align='center'>
+            <td colSpan={2}><b>ワンタッチボタン</b></td>
+          </tr>
+          <tr>
+            <td>ボタン</td>
+            <td>{button}</td>
+          </tr>
+          <tr>
+            <td>動作</td>
+            <td>{control}</td>
           </tr>
           <tr>
             <td>呼戻し</td>

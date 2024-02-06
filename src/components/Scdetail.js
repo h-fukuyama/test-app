@@ -3,7 +3,7 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
-import { ScDetailTable0, ScDetailTable1 } from '../utils/sc/ScDetailTable';
+import { ScDetailTable0, ScDetailTable1, ScDetailTable4 } from '../utils/sc/ScDetailTable';
 import { BinaryConverter, mapFolderValue, replaceControl, replaceValue } from '../utils/sc/scComponentFunction';
 import { hexToSignedDecimal } from '../utils/calculate';
 import { processBGMBand } from '../utils/bgmBand';
@@ -54,12 +54,12 @@ const ScDetailProcessor = ({ sc,id }) => {
             return <ScDetailTable0 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} repeat={repeat} external={external} channel={channel} params={params}/>;
         case '01': //電源制御:1行
             return <ScDetailTable1 title="電源ON/OFF" power={replaceValue(sc[startIndex+33])} />
-        case '02': //チャンネル変更:9行
+        case '02': //チャンネル変更:9行(呼び戻し無し)
             return sc;        
         case '03': //カット制御:4行
             return sc;        
         case '04': //ワンタッチボタン:2行
-            return sc;        
+            return <ScDetailTable4 button={(sc[startIndex+47] === '00' ? "未設定" : parseInt(sc[startIndex+48],16))} control={replaceValue(sc[startIndex+48])} />;        
         case '05': //外部制御:3行
             return sc;        
         case '06': //音量3行
