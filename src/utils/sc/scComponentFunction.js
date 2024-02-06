@@ -39,6 +39,19 @@ export const replaceVolume = (value) => {
     }
 };
 
+export const replaceSubject = (value) => {
+  switch (value) {
+    case '00':
+      return "未設定";
+    case '01':
+      return "店内";
+    case '02':
+      return "事務所";  
+    default:
+      return value; // 何も該当しない場合は元の値をそのまま返す
+  }
+};
+
 export const mapFolderValue = (value) => {
   switch (value) {
     case '00':

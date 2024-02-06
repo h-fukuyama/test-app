@@ -147,3 +147,28 @@ export const ScDetailTable5 = ({external2}) => {
         </table>
     )
 };
+
+export const ScDetailTable6 = ({subject, control, volume}) => {
+    return (
+      <table align='center'>
+          <tr text-align='center'>
+            <td colSpan={3}><b>音量制御</b></td>
+          </tr>
+          <tr>
+            <td>対象</td>
+            <td colSpan={2}>{subject}</td>
+        </tr>
+        <tr>
+            <td>制御</td>
+            <td colSpan={2}>{control}</td>
+        </tr>
+        {control !== "秒数指定" && (
+        <tr>
+            <td>秒数</td>
+            <td>{volume}秒</td>
+            <td>(1~99秒)</td>
+        </tr>
+        )}
+        </table>
+    )
+};

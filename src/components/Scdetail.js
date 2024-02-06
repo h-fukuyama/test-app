@@ -3,8 +3,8 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
-import { ScDetailTable0, ScDetailTable1, ScDetailTable4, ScDetailTable5 } from '../utils/sc/ScDetailTable';
-import { BinaryConverter, mapFolderValue, replaceControl, replaceValue } from '../utils/sc/scComponentFunction';
+import { ScDetailTable0, ScDetailTable1, ScDetailTable4, ScDetailTable5, ScDetailTable6 } from '../utils/sc/ScDetailTable';
+import { BinaryConverter, mapFolderValue, replaceControl, replaceValue, replaceSubject, replaceVolume } from '../utils/sc/scComponentFunction';
 import { hexToSignedDecimal } from '../utils/calculate';
 import { processBGMBand } from '../utils/bgmBand';
 
@@ -64,7 +64,7 @@ const ScDetailProcessor = ({ sc,id }) => {
             const external2 = [parseInt(sc[startIndex+49],16), replaceControl(sc[startIndex+50]), parseInt(sc[startIndex+51],16)];
             return <ScDetailTable5 external2={external2} />;        
         case '06': //音量3行
-            return sc;        
+            return <ScDetailTable6 subject={replaceSubject(sc[startIndex+52])} control={replaceVolume(sc[startIndex+53])} volume={parseInt(sc[startIndex+54],16)} />;        
         case '07': //AUX:1行
             return <ScDetailTable1 title="AUX" power={replaceValue(sc[startIndex+55])} />        
         default:
