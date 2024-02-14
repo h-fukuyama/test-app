@@ -14,6 +14,9 @@
 }
 
 .App-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,6 +25,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  z-index: 1000; /* 必要に応じて、他の要素よりも手前に表示するための z-index を指定します。 */
 }
 
 nav {
@@ -33,7 +37,6 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
 }
 
 li {
@@ -93,4 +96,83 @@ a:hover {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly; /* 要素間を均等にスペースを開ける */
+}
+
+.detail-button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.detail-button:hover {
+  background-color: #ffcc00;
+}
+
+/* App.css や適切な場所に配置 */
+
+.table-container {
+  max-height: 300px; /* 適切な高さに調整してください */
+  overflow-y: auto;
+}
+
+table {
+  width: 70%;
+  border-collapse: collapse;
+  margin-bottom: 5px;
+}
+
+table, th, td {
+  border: 0.5px solid #ddd;
+}
+
+th, td {
+  padding: 1px;
+  text-align: center;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Sidebar styles */
+#sidebar {
+  /* list-style-type: none; */
+  padding: 10;
+  margin: 10;
+  background-color: white;
+  position: fixed;
+  height: 100%;
+  /* flex-direction: column; */
+}
+
+#sidebar li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+
+
+/* Highlight the selected item */
+#sidebar li:hover {
+  background-color: #ddd;
+}
+
+/* Main content styles */
+#main-content {
+  margin-left: 220px; /* Adjust margin to accommodate the sidebar width */
+  padding: 20px;
 }

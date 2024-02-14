@@ -4,6 +4,7 @@ import { FileProvider } from './context/FileContext';
 import OthrComponent from './components/OthrComponent';
 import MainComponent from './components/MainComponent';
 import ScComponent from './components/ScComponent';
+import ScDetail from './components/Scdetail';
 import MenuComponent from './components/MenuComponent';
 import IsmsComponent from './components/IsmsComponent';
 import LtComponent from './components/LtComponent';
@@ -19,7 +20,7 @@ function App() {
           <Route path="/" element={<FileInputScreen />} />
           <Route path="/main" element={<MainComponent />} />
           <Route path="/sc" element={<ScComponent />} /> {/* 詳細表示が必要 */}
-            <Route path="/sc/:id" element={<ScComponent />} />
+            <Route path="/sc/:id" element={<ScDetail />} />
           <Route path="/menu" element={<MenuComponent />} /> {/* 詳細表示が必要 */} 
             <Route path="/menu/:id" element={<ScComponent />} />
           <Route path="/isms" element={<IsmsComponent />} />
