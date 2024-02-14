@@ -68,29 +68,34 @@ export const mapFolderValue = (value) => {
   }
 };
 
-export const BinaryConverter = ( input ) => {
+export const BinaryConverter = (input) => {
   const binaryString = (+input).toString(2);
   const reversedBinaryArray = binaryString.split('').reverse();
 
-  const output = reversedBinaryArray.map((bit, index) => {
+  let output = ["", "", ""];
+
+  reversedBinaryArray.forEach((bit, index) => {
     if (bit === '1') {
       switch (index) {
         case 0:
-          return '店内';
+          output[0] = '店内';
+          break;
         case 1:
-          return '事務所';
+          output[1] = '事務所';
+          break;
         case 2:
-          return 'インカム';
+          output[2] = 'インカム';
+          break;
         // 他のビットに対する処理も追加
         default:
-          return '';
+          break;
       }
     }
-    return '';
   });
 
   return output;
-}
+};
+
 
 export const replaceControl = (value) => {
   switch (value) {
@@ -113,8 +118,16 @@ export const getActionResult1 = (sc, i) => {
           `電源${replaceValue(sc[i + 22433])}`,
         ];
       case '02':
+        let channel = "";
+        if(sc[i+34] === '00') {
+          channel = `${processBGMBand(sc[i + 37])}${parseInt(sc[i + 38], 16)}`
+        } else if(sc[i+34] === '01') {
+          channel = "プログラム" + (sc[i+35] === '00' ? "未設定" : sc[i+35]);  
+        } else if(sc[i+34] === '02') {
+          channel = sc[i+39];
+        }
         return [
-          `チャンネル変更 ${processBGMBand(sc[i + 37])}${parseInt(sc[i + 38], 16)}`,
+          "チャンネル変更" + channel,
           "ユーザ設定不可",
         ];
       case '03':
