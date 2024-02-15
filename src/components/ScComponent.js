@@ -89,6 +89,7 @@ export const ScProcessor1 = ({ sc }) => {
         secondArrayValue || "<未登録>",
       ]);
     } else {
+      console.log("isSameButtonが違うのでここに来るはず"+i);
       const actionResult = getActionResult1(sc, i);
       datasets.push([(i / 56) + 1, ...actionResult]);
     }

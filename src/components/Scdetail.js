@@ -26,25 +26,25 @@ const ScDetail = () => {
   const ScDetailProcessor = ({ sc,id }) => {
     switch (sc[startIndex]) {
       case '00': //コメント再生         
-          const fileName = [sc[startIndex+1],sc[startIndex+5],sc[startIndex+9],sc[startIndex+13],sc[startIndex+17]];
-          const folder = [sc[startIndex+2],sc[startIndex+6],sc[startIndex+10],sc[startIndex+14],sc[startIndex+18]];
+          const fileName = [sc[startIndex+1+id],sc[startIndex+5+id],sc[startIndex+9+id],sc[startIndex+13+id],sc[startIndex+17+id]];
+          const folder = [sc[startIndex+2+id],sc[startIndex+6+id],sc[startIndex+10+id],sc[startIndex+14+id],sc[startIndex+18+id]];
           const transformedFolder = folder.map(mapFolderValue);
-          const volume = [sc[startIndex+3],sc[startIndex+7],sc[startIndex+11],sc[startIndex+15],sc[startIndex+19]];
+          const volume = [sc[startIndex+3+id],sc[startIndex+7+id],sc[startIndex+11+id],sc[startIndex+15+id],sc[startIndex+19+id]];
           const transformedVolume = volume.map(hexToSignedDecimal);
-          const mixing = [sc[startIndex+4],sc[startIndex+8],sc[startIndex+12],sc[startIndex+16],sc[startIndex+20]];
+          const mixing = [sc[startIndex+4+id],sc[startIndex+8+id],sc[startIndex+12+id],sc[startIndex+16+id],sc[startIndex+20+id]];
           const transformedMixing = mixing.map(hexValue => parseInt(hexValue, 16));
-          const output = BinaryConverter(sc[startIndex+21]);
-          const repeat = (sc[startIndex+22] === '00' ?  '未設定' : parseInt(sc[startIndex+22], 16) ); 
-          const external = [(sc[startIndex+23] === '00' ? '利用しない' : '利用する'), parseInt(sc[startIndex+24],16), replaceControl(sc[startIndex+25]), parseInt(sc[startIndex+26],16)];
-          const channel = [(sc[startIndex+27] === '00' ? '利用しない' : '利用する')];
+          const output = BinaryConverter(sc[startIndex+21+id]);
+          const repeat = (sc[startIndex+22+id] === '00' ?  '未設定' : parseInt(sc[startIndex+22+id], 16) ); 
+          const external = [(sc[startIndex+23+id] === '00' ? '利用しない' : '利用する'), parseInt(sc[startIndex+24+id],16), replaceControl(sc[startIndex+25+id]), parseInt(sc[startIndex+26+id],16)];
+          const channel = [(sc[startIndex+27+id] === '00' ? '利用しない' : '利用する')];
           const channelName = (() => {
-              switch (sc[startIndex+28]) {
+              switch (sc[startIndex+28+id]) {
                   case '00': 
-                      return `${processBGMBand(sc[startIndex+31])}${parseInt(sc[startIndex+32])}`;
+                      return `${processBGMBand(sc[startIndex+31+id])}${parseInt(sc[startIndex+32+id])}`;
                   case '01':
-                      return sc[startIndex+29] === '00' ? '未設定' : `プログラム${sc[startIndex+29]}`;
+                      return sc[startIndex+29+id] === '00' ? '未設定' : `プログラム${sc[startIndex+29+id]}`;
                   case '02':
-                      return sc[startIndex+30];
+                      return sc[startIndex+30+id];
                   default:
                       return '不明'
               }
@@ -83,7 +83,8 @@ const ScDetail = () => {
     }
   } 
 
-   const tableSet = ScDetailProcessor({ sc: fileContent?.if_config?.sc || [], id });
+  const tableSet = ScDetailProcessor({ sc: fileContent?.if_config?.sc || [], id: 0 });
+  const tableSet2 = ScDetailProcessor({ sc: fileContent?.if_config?.sc || [], id: 22400 });
 
   return (
     <div>
@@ -95,6 +96,7 @@ const ScDetail = () => {
           {fileContent && (
               <div>
                 {tableSet}
+                {tableSet2}
               </div>
             )
           }
