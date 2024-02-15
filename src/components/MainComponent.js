@@ -30,7 +30,7 @@ const MainComponent = () => {
           {fileContent? (
             <div>
               <h2>スタッフコール(両方未接続の設定以外を表示)</h2>
-              <h3>無線① WCシリーズ(1~16)</h3>
+              <h3>無線① WCシリーズ(101~400)</h3>
               {datasets1.map((data, index) => (
                 <div key={index}>
                   {(data[1] !== "<未登録>" || data[2] !== "<未登録>") && (
