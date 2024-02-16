@@ -15,7 +15,7 @@ const ScDetail = () => {
   const { id } = useParams();
   const location = useLocation();
   const params = location.key;
-  const startIndex = id >= 101 ? (id - 101) * 56 : (id - 1) * 56;
+  const startIndex = id >= 101 ? (id - 101) * 56 : ((id - 1) * 56)+44800;
   
   useEffect(() => {
     if (!file) {
@@ -79,12 +79,12 @@ const ScDetail = () => {
       case '07': //AUX:1行
           return <ScDetailTable1 title="AUX" power={replaceValue(sc[startIndex+55])} back={sc[startIndex+22400] === '00' ? "利用しない" : "利用する"}/>;        
       default:
-        return [sc[id], sc[id + 22400]];
+        return "";
     }
   } 
 
   const tableSet = ScDetailProcessor({ sc: fileContent?.if_config?.sc || [], id: 0 });
-  const tableSet2 = ScDetailProcessor({ sc: fileContent?.if_config?.sc || [], id: 22400 });
+  const tableSet2 = ScDetailProcessor({ sc: fileContent?.if_config?.sc || [], id: startIndex<44800 ? 22400 : 448 });
   
   return (
     <div>
@@ -95,8 +95,8 @@ const ScDetail = () => {
           <h3>ボタン: {Number(id)}の詳細</h3>
           {fileContent && (
               <div>
-                {tableSet}
-                {fileContent?.if_config?.sc[startIndex] === fileContent?.if_config?.sc[startIndex + 22400] ? tableSet2 : null}
+                {tableSet.props.fileName?.join('') === '' ? '未登録' : tableSet}
+                {(tableSet.props.back === '利用しない' || tableSet.props.fileName.join('') === '') ? null : tableSet2}
               </div>
             )
           }
