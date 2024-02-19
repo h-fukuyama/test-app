@@ -32,6 +32,7 @@ const MenuComponent = () => {
 
       results.push(result);
     }
+    console.log(results);
     return results;
   };
 
@@ -54,7 +55,26 @@ const MenuComponent = () => {
     return result1;
   };
   const processFunction2 = (property) => {
-    return [];
+    const binary = parseInt(property, 16).toString(2).padStart(16, '0');
+    const buttonStatus = [];
+    for ( let i = 0; i < 14; i++ ){
+      const mode = binary[i] === '0' ? '停止中' : '起動中';
+      buttonStatus.push(mode);
+    }
+    console.log(buttonStatus);
+    if(buttonStatus.every(status => status === '停止中')) {
+      return [{property:'ワンタッチボタン', value:'全て停止中'}];
+    } else if(buttonStatus.every(status => status === '起動中')) {
+      return [{property:'ワンタッチボタン', value: '全て起動中'}];
+    } else {
+      const activeButtons = buttonStatus.reduce((acc, status, index) => {
+        if (status === '起動中') {
+          acc.push(index + 1);
+        }
+        return acc;
+      }, []);
+      return [{property: '起動中のワンタッチボタン', value: activeButtons.join(',')}];
+    }
   }
   const processFunction3 = (property) => {
     return [];
