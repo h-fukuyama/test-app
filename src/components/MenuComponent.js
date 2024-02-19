@@ -32,7 +32,6 @@ const MenuComponent = () => {
 
       results.push(result);
     }
-    console.log(results);
     return results;
   };
 
@@ -61,7 +60,6 @@ const MenuComponent = () => {
       const mode = binary[i] === '0' ? '停止中' : '起動中';
       buttonStatus.push(mode);
     }
-    console.log(buttonStatus);
     if(buttonStatus.every(status => status === '停止中')) {
       return [{property:'ワンタッチボタン', value:'全て停止中'}];
     } else if(buttonStatus.every(status => status === '起動中')) {
@@ -77,6 +75,23 @@ const MenuComponent = () => {
     }
   }
   const processFunction3 = (property) => {
+    console.log(property);
+    const hexPairs = property?.match(/.{1,2}/g);
+    console.log(hexPairs);
+    let prevDecimal = parseInt(hexPairs[0],16);
+    let isAscending = true;
+    for ( let i = 1; i < hexPairs.length; i++ ) {
+      const currentDecimal = parseInt(hexPairs[i], 16);
+      if (currentDecimal < prevDecimal) {
+        isAscending = false; // 昇順でない場合フラグをfalseにして終了
+        break;
+      }
+      prevDecimal = currentDecimal; // 前の数字を更新
+    }
+    
+    if (!isAscending) {
+      console.log(prevDecimal); // 昇順に並んでいない箇所の10進数を出力
+    }
     return [];
   }
   const processFunction4 = (property) => {
