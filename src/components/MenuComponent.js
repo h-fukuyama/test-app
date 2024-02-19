@@ -3,7 +3,8 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
-import { hexToBinary, checkBit } from '../utils/calculate';
+import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
+import { replaceEQ, eqSetting } from '../utils/menu/menuComponentFunction';
 
 const MenuComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -25,6 +26,7 @@ const MenuComponent = () => {
     const results = [];
 
     for (let i = 0; i < 17 ; i++) {
+      console.log(menu[0]);
       const property = menu[i];
       const func = menuPropertyFunctions[i];
 
@@ -74,10 +76,8 @@ const MenuComponent = () => {
       return [{property: '起動中のワンタッチボタン', value: activeButtons.join(',')}];
     }
   }
-  const processFunction3 = (property) => {
-    console.log(property);
+  const processFunction3 = (property) => { //一旦無視
     const hexPairs = property?.match(/.{1,2}/g);
-    console.log(hexPairs);
     let prevDecimal = parseInt(hexPairs[0],16);
     let isAscending = true;
     for ( let i = 1; i < hexPairs.length; i++ ) {
@@ -90,12 +90,22 @@ const MenuComponent = () => {
     }
     
     if (!isAscending) {
-      console.log(prevDecimal); // 昇順に並んでいない箇所の10進数を出力
     }
     return [];
   }
   const processFunction4 = (property) => {
-    return [];
+    console.log(property);
+    const result4 = [{ property: '店内イコライザ', value: "" }];
+    const hexPairs = property.match(/.{1,2}/g);
+    hexPairs.map((element, index) => {
+      if ( index >= 0 && index <= 2) {
+        return result4.push({ property: replaceEQ(index), value: hexToSignedDecimal(element) });
+      } else {
+        return result4.push({ property: '種別', value: eqSetting(element)});
+      }
+    })
+    console.log(result4);
+    return result4;
   }
   const processFunction5 = (property) => {
     return [];
