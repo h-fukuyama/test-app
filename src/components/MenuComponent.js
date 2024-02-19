@@ -3,6 +3,7 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
+import { hexToBinary, checkBit } from '../utils/calculate';
 
 const MenuComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -34,22 +35,108 @@ const MenuComponent = () => {
     return results;
   };
 
+  // ここから１行ずつのルール定義に入る------------------------
+  const processFunction1 = (property) => {
+    const result1 = [];
+    const binaryString = hexToBinary(property);
+
+    const bitDefinitions = [
+      { bit: 0, property: 'AUX(ONで「手動」)' },
+      { bit: 1, property: 'チャンネルロック' },
+      { bit: 2, property: 'ACアウトレット(ONで「連動」)' },
+    ];
+
+    bitDefinitions.forEach(({ bit, property }) => {
+      const isBitSet = checkBit(binaryString, bit);
+      result1.push({ property, value: isBitSet ? 'ON' : 'OFF' });
+    });
+
+    return result1;
+  };
+  const processFunction2 = (property) => {
+    return [];
+  }
+  const processFunction3 = (property) => {
+    return [];
+  }
+  const processFunction4 = (property) => {
+    return [];
+  }
+  const processFunction5 = (property) => {
+    return [];
+  }
+  const processFunction6 = (property) => {
+    return [];
+  }
+  const processFunction7 = (property) => {
+    return [];
+  }
+  const processFunction8 = (property) => {
+    return [];
+  }
+  const processFunction9 = (property) => {
+    return [];
+  }
+  const processFunction10 = (property) => {
+    return [];
+  }
+  const processFunction11 = (property) => {
+    return [];
+  }
+  const processFunction12 = (property) => {
+    return [];
+  }
+  const processFunction13 = (property) => {
+    return [];
+  }
+  const processFunction14 = (property) => {
+    return [];
+  }
+  const processFunction15 = (property) => {
+    return [];
+  }
+  const processFunction16 = (property) => {
+    return [];
+  }
+  const processFunction17 = (property) => {
+    return [];
+  }
+  const results_all = MenuProcessor({ menu: fileContent?.if_config?.menu || [] });
+
   return (
     <div>
-      {file && ( //fileが存在すれば以下を表示
+      {file && (
         <div>
           <Header />
           <h2>Menu Page</h2>
-          <p>File Name: {file.type}</p>
-          {fileContent && (
+          <p>File Name: {file.name}</p>
+          {fileContent && fileContent.if_config ? (
             <div>
-              <h3>menu Config</h3>
-              <pre>{JSON.stringify(fileContent.if_config.menu, null, 2)}</pre>
+              {results_all.map((result, index) => (
+                <div key={index}>
+                  <h4>{`Result ${index + 1}`}</h4>
+                  <div>
+                    {result.map(({ property, value }) => (
+                      <div
+                        key={property}
+                        className={`${value === 'ON' ? 'underline' : ''} ${value === '未使用' ? 'line-through' : ''}`}
+                        style={{ marginBottom: '0.5em' }}
+                      >
+                        {`${property}: ${value}`}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
+          ) : (
+            <p>Loading...</p>
           )}
         </div>
       )}
-      {!file && <h2>menu Page</h2>} {/* fileが存在しなければタイトルだけ表示（/に遷移するとかでもよさそう) */}
+      {!file && (
+        <p>Resetting...</p>
+      )}
     </div>
   );
 };
