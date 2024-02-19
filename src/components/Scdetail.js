@@ -95,8 +95,21 @@ const ScDetail = () => {
           <h3>ボタン: {Number(id)}の詳細</h3>
           {fileContent && (
               <div>
+                <h4>呼出</h4>
                 {tableSet.props.fileName?.join('') === '' ? '未登録' : tableSet}
-                {(tableSet.props.back === '利用しない' || tableSet.props.fileName.join('') === '') ? null : tableSet2}
+                {
+                  (tableSet.props.back === '利用しない' || tableSet.props.fileName.join('') === '') 
+                  ? 
+                  <>
+                    <h4>呼戻</h4>
+                    未登録
+                  </>
+                  : 
+                  <>
+                    <h4>呼戻</h4>
+                    {tableSet2}
+                  </>
+                }
               </div>
             )
           }
