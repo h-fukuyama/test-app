@@ -1,10 +1,10 @@
 export const replaceEQ = (value) => {
     switch (value) {
-      case '0':
+      case 0:
         return "低域";
-      case '1':
+      case 1:
         return "中域";
-      case '2':
+      case 2:
         return "高域";  
       default:
         return value; // 何も該当しない場合は元の値をそのまま返す

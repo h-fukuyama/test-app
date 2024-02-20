@@ -18,6 +18,7 @@ const MenuComponent = () => {
   }, [file, navigate]);
 
   const MenuProcessor = ({ menu }) => {
+    console.log(menu);
     const menuPropertyFunctions = [
       processFunction1, processFunction2, processFunction3, processFunction4, processFunction5, processFunction6, processFunction7, processFunction8, processFunction9, processFunction10,
       processFunction11, processFunction12, processFunction13, processFunction14, processFunction15, processFunction16, processFunction17
@@ -25,8 +26,7 @@ const MenuComponent = () => {
 
     const results = [];
 
-    for (let i = 0; i < 17 ; i++) {
-      console.log(menu[0]);
+    for (let i = 0; i < 4 ; i++) {
       const property = menu[i];
       const func = menuPropertyFunctions[i];
 
@@ -75,24 +75,24 @@ const MenuComponent = () => {
       }, []);
       return [{property: '起動中のワンタッチボタン', value: activeButtons.join(',')}];
     }
-  }
+  };
   const processFunction3 = (property) => { //一旦無視
-    const hexPairs = property?.match(/.{1,2}/g);
-    let prevDecimal = parseInt(hexPairs[0],16);
-    let isAscending = true;
-    for ( let i = 1; i < hexPairs.length; i++ ) {
-      const currentDecimal = parseInt(hexPairs[i], 16);
-      if (currentDecimal < prevDecimal) {
-        isAscending = false; // 昇順でない場合フラグをfalseにして終了
-        break;
-      }
-      prevDecimal = currentDecimal; // 前の数字を更新
-    }
+    // const hexPairs = property?.match(/.{1,2}/g);
+    // let prevDecimal = parseInt(hexPairs[0],16);
+    // let isAscending = true;
+    // for ( let i = 1; i < hexPairs.length; i++ ) {
+    //   const currentDecimal = parseInt(hexPairs[i], 16);
+    //   if (currentDecimal < prevDecimal) {
+    //     isAscending = false; // 昇順でない場合フラグをfalseにして終了
+    //     break;
+    //   }
+    //   prevDecimal = currentDecimal; // 前の数字を更新
+    // }
     
-    if (!isAscending) {
-    }
+    // if (!isAscending) {
+    // }
     return [];
-  }
+  };
   const processFunction4 = (property) => {
     console.log(property);
     const result4 = [{ property: '店内イコライザ', value: "" }];
@@ -106,46 +106,47 @@ const MenuComponent = () => {
     })
     console.log(result4);
     return result4;
-  }
+  };
   const processFunction5 = (property) => {
     return [];
-  }
+  };
   const processFunction6 = (property) => {
     return [];
-  }
+  };
   const processFunction7 = (property) => {
     return [];
-  }
+  };
   const processFunction8 = (property) => {
     return [];
-  }
+  };
   const processFunction9 = (property) => {
     return [];
-  }
+  };
   const processFunction10 = (property) => {
     return [];
-  }
+  };
   const processFunction11 = (property) => {
     return [];
-  }
+  };
   const processFunction12 = (property) => {
     return [];
-  }
+  };
   const processFunction13 = (property) => {
     return [];
-  }
+  };
   const processFunction14 = (property) => {
     return [];
-  }
+  };
   const processFunction15 = (property) => {
     return [];
-  }
+  };
   const processFunction16 = (property) => {
     return [];
-  }
+  };
   const processFunction17 = (property) => {
     return [];
-  }
+  };
+
   const results_all = MenuProcessor({ menu: fileContent?.if_config?.menu || [] });
 
   return (
