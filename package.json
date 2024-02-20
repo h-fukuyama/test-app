@@ -23,7 +23,8 @@
     "rm": "rm -rf docs",
     "mv": "mv build docs",
     "git": "git add . && git commit && git push origin develop",
-    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
+    "deploy": "npm run rm && npm run build && npm run mv && npm run git",
+    "deploy2": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
