@@ -60,7 +60,7 @@
   "mv": "mv build docs",
   
     
-  "git": "git add . && git commit && git push origin master",
+  "git": "git add . && git commit && git push origin develop",
   
     
   "deploy": "npm run rm && npm run build && npm run mv && npm run git"
