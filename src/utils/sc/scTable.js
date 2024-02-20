@@ -10,7 +10,7 @@ export const ScTable1 = ({ id, button, call, back }) => {
                 <td width="100px">呼出</td>
                 <td width="600px"><b>{call}</b></td>
                 <td width="150px" rowSpan={2}>
-                <Link to={{ pathname: `/sc/${id}`, state: {back}}}>
+                <Link to={{ pathname: `/sc/${button}`, state: {back}}}>
                         <button className="detail-button">詳細表示</button>
                     </Link>
                 </td>
