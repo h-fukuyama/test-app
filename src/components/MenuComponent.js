@@ -18,7 +18,6 @@ const MenuComponent = () => {
   }, [file, navigate]);
 
   const MenuProcessor = ({ menu }) => {
-    console.log(menu);
     const menuPropertyFunctions = [
       processFunction1, processFunction2, processFunction3, processFunction4, processFunction5, processFunction6, processFunction7, processFunction8, processFunction9, processFunction10,
       processFunction11, processFunction12, processFunction13, processFunction14, processFunction15, processFunction16, processFunction17
@@ -26,7 +25,7 @@ const MenuComponent = () => {
 
     const results = [];
 
-    for (let i = 0; i < 4 ; i++) {
+    for (let i = 0; i < 17 ; i++) {
       const property = menu[i];
       const func = menuPropertyFunctions[i];
 
@@ -76,7 +75,8 @@ const MenuComponent = () => {
       return [{property: '起動中のワンタッチボタン', value: activeButtons.join(',')}];
     }
   };
-  const processFunction3 = (property) => { //一旦無視
+  const processFunction3 = () => { //一旦無視
+    const result3 = [];
     // const hexPairs = property?.match(/.{1,2}/g);
     // let prevDecimal = parseInt(hexPairs[0],16);
     // let isAscending = true;
@@ -91,7 +91,8 @@ const MenuComponent = () => {
     
     // if (!isAscending) {
     // }
-    return [];
+    result3.push({ property: 'Result3', value: 'Skip'});
+    return result3;
   };
   const processFunction4 = (property) => {
     console.log(property);
@@ -104,7 +105,6 @@ const MenuComponent = () => {
         return result4.push({ property: '種別', value: eqSetting(element)});
       }
     })
-    console.log(result4);
     return result4;
   };
   const processFunction5 = (property) => {
