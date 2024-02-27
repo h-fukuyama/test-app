@@ -38,6 +38,23 @@ const MenuComponent = () => {
     }
     return results;
   };
+  const MenuProcessor2 = ({ menu }) => {
+    const menuPropertyFunctions = [
+      processFunction997, processFunction998, processFunction999
+    ];
+
+    const results = [];
+
+    for (let i = 997; i < 1000 ; i++) {
+      const property = menu[i];
+      if(property){
+        const func = menuPropertyFunctions[i-997];
+        const result = func(property);
+        results.push(result);
+      }
+    }
+    return results;
+  };
 
   // ここから１行ずつのルール定義に入る------------------------
   const processFunction1 = (property) => {
@@ -107,7 +124,6 @@ const MenuComponent = () => {
         return result4.push({ property: '種別', value: eqSetting(element)});
       }
     })
-    console.log(result4);
     return result4;
   };
   const processFunction5 = (property) => {
@@ -167,8 +183,40 @@ const MenuComponent = () => {
   const processFunction17 = (property) => {
     return [{property: '時刻自動補正時間', value: `${parseInt(property, 16)}分`}];
   };
+  const processFunction997 = (property) => {
+    return [{property: 'radiko', value: property === '00' ? "無効" : "有効" }];
+  };
+  const processFunction998 = (property) => {
+    return [{property: 'プログラム', value: `${parseInt(property, 10)}`}];
+  };
+  const processFunction999 = (property) => {
+    let allOn = true;
+    let allOff = true;
+    const results = [];
+    for (let i = 0; i < property.length; i += 2) {
+      const chunk = property.substring(i, i + 2);
+      const buttonNumber = Math.floor(i / 2) + 1;
+      const value = chunk === '01' ? 'ON' : 'OFF';
+      if (value === 'ON') {
+        results.push(buttonNumber);
+      }
+      if (value === 'OFF') {
+        allOn = false;
+      } else {
+        allOff = false;
+      }
+    }
+    if (allOn) {
+      return [{ property: "CM選択スイッチ", value: "全てON" }];
+    } else if (allOff) {
+      return [{ property: "CM選択スイッチ", value: "全てOFF" }];
+    } else {
+      return [{ property: "CM選択スイッチONのもの(最左端を1とする)", value: results.join(',') }];
+    }
+  };
 
   const results_all = MenuProcessor({ menu: fileContent?.if_config?.menu || [] });
+  const results_all2 = MenuProcessor2({ menu: fileContent?.if_config?.menu || [] });
 
   return (
     <div>
@@ -184,13 +232,17 @@ const MenuComponent = () => {
                   <h4>{`Result ${index + 1}`}</h4>
                   <div>
                     {result.map(({ property, value }) => (
-                      <div
-                        key={property}
-                        className={`${value === 'ON' ? 'underline' : ''} ${value === '未使用' ? 'line-through' : ''}`}
-                        style={{ marginBottom: '0.5em' }}
-                      >
-                        {`${property}: ${value}`}
-                      </div>
+                      <div key={property}> {`${property}: ${value}`}</div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              {results_all2?.map((result, index) => (
+                <div key={index}>
+                  <h4>{`Result ${index + 998}`}</h4>
+                  <div>
+                    {result.map(({ property, value }) => (
+                      <div key={property}>{`${property}: ${value}`}</div>
                     ))}
                   </div>
                 </div>
