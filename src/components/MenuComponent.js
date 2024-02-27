@@ -30,9 +30,7 @@ const MenuComponent = () => {
       const property = menu[i];
       if(property){
         const func = menuPropertyFunctions[i];
-      
         const result = func(property);
-
         results.push(result);
       }
     }
@@ -92,8 +90,7 @@ const MenuComponent = () => {
       return acc;
     }, []);
     return [{ property: '起動中のワンタッチボタン', value: activeButtons.join(',') }];
-  };
-  
+  };  
   const processFunction3 = (property) => {
     const hexDigits = property.match(/.{1,2}/g) || []; // 2桁ずつ配列にセットする
     const chunkSize = 48;
@@ -183,6 +180,7 @@ const MenuComponent = () => {
   const processFunction17 = (property) => {
     return [{property: '時刻自動補正時間', value: `${parseInt(property, 16)}分`}];
   };
+  // ---------------------------------------------------------------------
   const processFunction997 = (property) => {
     return [{property: 'radiko', value: property === '00' ? "無効" : "有効" }];
   };
@@ -214,6 +212,7 @@ const MenuComponent = () => {
       return [{ property: "CM選択スイッチONのもの(最左端を1とする)", value: results.join(',') }];
     }
   };
+  // --------------------------------------------------------------------------
 
   const results_all = MenuProcessor({ menu: fileContent?.if_config?.menu || [] });
   const results_all2 = MenuProcessor2({ menu: fileContent?.if_config?.menu || [] });
