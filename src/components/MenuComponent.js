@@ -5,6 +5,7 @@ import Header from './Header';
 import useFileContent from '../utils/useFileContent';
 import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
 import { replaceEQ, eqSetting } from '../utils/menu/menuComponentFunction';
+import { oneTouch } from '../utils/checkButton';
 
 const MenuComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -27,7 +28,6 @@ const MenuComponent = () => {
 
     for (let i = 6; i < 17 ; i++) {
       const property = menu[i];
-      console.log(property);
       const func = menuPropertyFunctions[i];
     
       const result = func(property);
@@ -170,16 +170,16 @@ const MenuComponent = () => {
     return [{property: 'LCDコントラスト', value: parseInt(property,10)}];
   };
   const processFunction8 = (property) => {
-    return [];
+    return [{property: 'LCD明るさ', value: parseInt(property,10)}];
   };
   const processFunction9 = (property) => {
-    return [];
+    return [{property: 'LCDエコモード明るさ', value: parseInt(property,10)}];
   };
   const processFunction10 = (property) => {
-    return [];
+    return [{property: 'LCDエコモード移行時間', value: `${parseInt(property, 10)}分`}];
   };
   const processFunction11 = (property) => {
-    return [];
+    return oneTouch(property, 6,'ローカルタイマーON番号');
   };
   const processFunction12 = (property) => {
     return [];

@@ -21,6 +21,36 @@ export const checkButton = (property, buttonCount, buttonDisplayName) => {
   return deniedButtons;
 };
 
+export const oneTouch = (property, buttonCount, buttonDisplayName) => {
+  const binaryString = hexToBinary(property);
+  const groupedResults = {};
+
+  for (let i = binaryString.length - 1; i >= binaryString.length - buttonCount; i--) {
+    const bitValue = binaryString[i];
+    const buttonName = `${binaryString.length - i}`;
+    const result = { property: buttonName, value: bitValue === '0' ? 'OFF' : 'ON' };
+  
+    if (!groupedResults[result.value]) {
+      groupedResults[result.value] = [];
+    }
+  
+    groupedResults[result.value].push(result);
+  }
+
+  const deniedButtons = groupedResults['ON'];
+  const deniedButtonNumbers = deniedButtons.map(button => button.property).join(',');
+
+  if (Object.keys(groupedResults).length === 1 && 'ON' in groupedResults) {
+    return [{ property: buttonDisplayName, value: '全てON' }];
+  } else if (Object.keys(groupedResults).length === 1 && 'OFF' in groupedResults) {
+    return [{ property: buttonDisplayName, value: '全てOFF' }];
+  }
+
+  return [{ property: "ローカルタイマーON番号", value: deniedButtonNumbers }];
+};
+
+
+
 
 
 export const channelMask = (property, prefix) => {
