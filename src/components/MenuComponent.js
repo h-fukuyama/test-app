@@ -182,7 +182,7 @@ const MenuComponent = () => {
     return oneTouch(property, 6,'ローカルタイマーON番号');
   };
   const processFunction12 = (property) => {
-    return [];
+    return [{property: 'AUX入力レベル', value: hexToSignedDecimal(property)}];
   };
   const processFunction13 = (property) => {
     return [];
