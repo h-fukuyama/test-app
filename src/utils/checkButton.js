@@ -28,17 +28,13 @@ export const oneTouch = (property, title) => {
       const binaryDigit = parseInt(hexDigit, 16).toString(2).padStart(4, '0');
       return binaryDigit;
     }).join('');
-    console.log(binaryString);
     const buttons = [];
     for (let i = 1; i <= binaryString.length; i++) {
       const value = binaryString[binaryString.length - i] === '1' ? 'ON' : 'OFF';
-      console.log( binaryString[binaryString.length - i]);
       buttons.push({ property: i, value });
     }
-
     const onButtons = buttons.filter(button => button.value === 'ON');
     const onButtonNumbers = onButtons.map(button => button.property).join(',');
-
     return [{ property: title, value: onButtonNumbers }];
   }
 };

@@ -197,7 +197,7 @@ const MenuComponent = () => {
     return oneTouch(property,'ワンタッチボタン自動ON/OFF時間有効');
   };
   const processFunction17 = (property) => {
-    return [];
+    return [{property: '時刻自動補正時間', value: `${parseInt(property, 16)}分`}];
   };
 
   const results_all = MenuProcessor({ menu: fileContent?.if_config?.menu || [] });
