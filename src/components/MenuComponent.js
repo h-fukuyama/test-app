@@ -179,7 +179,7 @@ const MenuComponent = () => {
     return [{property: 'LCDエコモード移行時間', value: `${parseInt(property, 10)}分`}];
   };
   const processFunction11 = (property) => {
-    return oneTouch(property, 6,'ローカルタイマーON番号');
+    return oneTouch(property,'ローカルタイマーON番号');
   };
   const processFunction12 = (property) => {
     return [{property: 'AUX入力レベル', value: hexToSignedDecimal(property)}];
@@ -194,7 +194,7 @@ const MenuComponent = () => {
     return [{property: 'AUTO~AUX終了の無音時間', value: `${parseInt(property, 16)}秒`}];
   };
   const processFunction16 = (property) => {
-    return [];
+    return oneTouch(property,'ワンタッチボタン自動ON/OFF時間有効');
   };
   const processFunction17 = (property) => {
     return [];
