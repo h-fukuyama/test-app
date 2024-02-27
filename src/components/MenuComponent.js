@@ -185,13 +185,13 @@ const MenuComponent = () => {
     return [{property: 'AUX入力レベル', value: hexToSignedDecimal(property)}];
   };
   const processFunction13 = (property) => {
-    return [];
+    return [{property: 'マイク入力レベル', value: hexToSignedDecimal(property)}];
   };
   const processFunction14 = (property) => {
-    return [];
+    return [{property: 'ライン入力レベル', value: hexToSignedDecimal(property)}];
   };
   const processFunction15 = (property) => {
-    return [];
+    return [{property: 'AUTO~AUX終了の無音時間', value: `${parseInt(property, 16)}秒`}];
   };
   const processFunction16 = (property) => {
     return [];
