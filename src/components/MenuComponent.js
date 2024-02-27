@@ -26,13 +26,15 @@ const MenuComponent = () => {
 
     const results = [];
 
-    for (let i = 6; i < 17 ; i++) {
+    for (let i = 0; i < 17 ; i++) {
       const property = menu[i];
-      const func = menuPropertyFunctions[i];
-    
-      const result = func(property);
+      if(property){
+        const func = menuPropertyFunctions[i];
+      
+        const result = func(property);
 
-      results.push(result);
+        results.push(result);
+      }
     }
     return results;
   };
@@ -52,85 +54,36 @@ const MenuComponent = () => {
       const isBitSet = checkBit(binaryString, bit);
       result1.push({ property, value: isBitSet ? 'ON' : 'OFF' });
     });
-    console.log(result1);
     return result1;
   };
   const processFunction2 = (property) => {
     const binary = parseInt(property, 16).toString(2).padStart(16, '0');
-    const buttonStatus = [];
-    for ( let i = 0; i < 14; i++ ){
-      const mode = binary[i] === '0' ? '停止中' : '起動中';
-      buttonStatus.push(mode);
-    }
-    if(buttonStatus.every(status => status === '停止中')) {
-      return [{property:'ワンタッチボタン', value:'全て停止中'}];
-    } else if(buttonStatus.every(status => status === '起動中')) {
-      return [{property:'ワンタッチボタン', value: '全て起動中'}];
-    } else {
-      const activeButtons = buttonStatus.reduce((acc, status, index) => {
-        if (status === '起動中') {
-          acc.push(index + 1);
-        }
-        return acc;
-      }, []);
-      return [{property: '起動中のワンタッチボタン', value: activeButtons.join(',')}];
-    }
-  };
-  const processFunction3 = (property) => {
-    const result3 = [];
-    const hexPairs = property.match(/.{1,2}/g);
+    const buttonStatus = binary.slice(0, 14).split('').map(bit => (bit === '0' ? '停止中' : '起動中'));
   
-    for (let i = 0; i < hexPairs.length - 1; i++) {
-      const currentHex = hexPairs[i];
-      const nextHex = hexPairs[i + 1];
-      
-      const value = parseInt(currentHex, 16);
-      result3.push({ property: `pair${i + 1}`, value });
+    if (buttonStatus.every(status => status === '停止中')) {
+      return [{ property: 'ワンタッチボタン', value: '全て停止中' }];
+    }
   
-      if (!nextHex) {
-        break; // 次のペアがない場合はループを抜ける
+    if (buttonStatus.every(status => status === '起動中')) {
+      return [{ property: 'ワンタッチボタン', value: '全て起動中' }];
+    }
+  
+    const activeButtons = buttonStatus.reduce((acc, status, index) => {
+      if (status === '起動中') {
+        acc.push(index + 1);
       }
-    }
-  
-    return result3;
+      return acc;
+    }, []);
+    return [{ property: '起動中のワンタッチボタン', value: activeButtons.join(',') }];
   };
   
-  // const processFunction3 = (property) => { //一旦無視
-  //   // const result3 = [];
-  //   // const hexPairs = property?.match(/.{1,2}/g);
-  //   // let prevDecimal = parseInt(hexPairs[0],16);
-  //   // let isAscending = true;
-  //   // for ( let i = 1; i < hexPairs.length; i++ ) {
-  //   //   const currentDecimal = parseInt(hexPairs[i], 16);
-  //   //   if (currentDecimal < prevDecimal) {
-  //   //     isAscending = false; // 昇順でない場合フラグをfalseにして終了
-  //   //     break;
-  //   //   }
-  //   //   prevDecimal = currentDecimal; // 前の数字を更新
-  //   // }
-    
-  //   // if (!isAscending) {
-  //   // }
-  //   // console.log("確認用");
-  //   // result3.push({ property: 'Result3', value: 'Skip'});
-  //   // return result3;
-  //   const splitHexPairs = async () => {
-  //     const hexValue = property;
-  //     const hexPairs = (hexValue.match(/.{1,2}/g) || []);
-  //     // ここで非同期処理を行う
-  //     // 例: 非同期で何かのAPIを呼び出す
-  //     const result = await someAsyncFunction();
-  //     return hexPairs;
-  //   };
-    
-  //   splitHexPairs().then(hexPairs => {
-  //     console.log(hexPairs);
-  //   }).catch(error => {
-  //     console.error(error);
-  //   });
-  // };
+  const processFunction3 = (property) => {
+    if(property){
+      const result3 = [];
+      return result3;
+    }
+  };
   const processFunction4 = (property) => {
-    console.log(property);
     const result4 = [{ property: '店内イコライザ', value: "" }];
     const hexPairs = property.match(/.{1,2}/g);
     hexPairs.map((element, index) => {
