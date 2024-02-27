@@ -25,7 +25,7 @@ const MenuComponent = () => {
 
     const results = [];
 
-    for (let i = 4; i < 17 ; i++) {
+    for (let i = 6; i < 17 ; i++) {
       const property = menu[i];
       console.log(property);
       const func = menuPropertyFunctions[i];
@@ -167,7 +167,7 @@ const MenuComponent = () => {
     return result6;
   };
   const processFunction7 = (property) => {
-    return [];
+    return [{property: 'LCDコントラスト', value: parseInt(property,10)}];
   };
   const processFunction8 = (property) => {
     return [];
