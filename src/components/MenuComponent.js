@@ -78,10 +78,24 @@ const MenuComponent = () => {
   };
   
   const processFunction3 = (property) => {
-    if(property){
-      const result3 = [];
-      return result3;
+    const hexDigits = property.match(/.{1,2}/g) || []; // 2桁ずつ配列にセットする
+    const chunkSize = 48;
+  
+    const output = [{ property: '整列順番', value: '' }];
+  
+    const chunks = [];
+    for (let i = 0; i < hexDigits.length; i += chunkSize) {
+      const chunk = hexDigits.slice(i, i + chunkSize);
+      chunks.push(chunk);
     }
+  
+    output.push(...chunks.map((chunk, index) => {
+      const value = chunk.join(' ');
+      const chunkIndex = `${index}巡目`;
+      return { property: chunkIndex, value };
+    }));
+  
+    return output;
   };
   const processFunction4 = (property) => {
     const result4 = [{ property: '店内イコライザ', value: "" }];
@@ -93,6 +107,7 @@ const MenuComponent = () => {
         return result4.push({ property: '種別', value: eqSetting(element)});
       }
     })
+    console.log(result4);
     return result4;
   };
   const processFunction5 = (property) => {
@@ -164,7 +179,7 @@ const MenuComponent = () => {
           <p>File Name: {file.name}</p>
           {fileContent && fileContent.if_config ? (
             <div>
-              {results_all.map((result, index) => (
+              {results_all?.map((result, index) => (
                 <div key={index}>
                   <h4>{`Result ${index + 1}`}</h4>
                   <div>
