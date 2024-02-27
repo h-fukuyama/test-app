@@ -9,7 +9,7 @@ const FileInputScreen = () => {
   const { setFileContext } = useFileContext();
 
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: 'application/json',
+    accept: 'application/json,.json',
     maxFiles: 1,
     onDrop: handleFileChange,
   });
@@ -34,7 +34,7 @@ const FileInputScreen = () => {
             border: '2px dashed #cccccc',
             borderRadius: '4px',
             padding: '20px',
-            textAlign: 'center',
+            textalign: 'center',
             cursor: 'pointer',
             height: '500px',
             display: 'flex',

@@ -25,10 +25,11 @@ const MenuComponent = () => {
 
     const results = [];
 
-    for (let i = 0; i < 17 ; i++) {
+    for (let i = 4; i < 17 ; i++) {
       const property = menu[i];
+      console.log(property);
       const func = menuPropertyFunctions[i];
-
+    
       const result = func(property);
 
       results.push(result);
@@ -51,7 +52,7 @@ const MenuComponent = () => {
       const isBitSet = checkBit(binaryString, bit);
       result1.push({ property, value: isBitSet ? 'ON' : 'OFF' });
     });
-
+    console.log(result1);
     return result1;
   };
   const processFunction2 = (property) => {
@@ -75,25 +76,59 @@ const MenuComponent = () => {
       return [{property: '起動中のワンタッチボタン', value: activeButtons.join(',')}];
     }
   };
-  const processFunction3 = () => { //一旦無視
+  const processFunction3 = (property) => {
     const result3 = [];
-    // const hexPairs = property?.match(/.{1,2}/g);
-    // let prevDecimal = parseInt(hexPairs[0],16);
-    // let isAscending = true;
-    // for ( let i = 1; i < hexPairs.length; i++ ) {
-    //   const currentDecimal = parseInt(hexPairs[i], 16);
-    //   if (currentDecimal < prevDecimal) {
-    //     isAscending = false; // 昇順でない場合フラグをfalseにして終了
-    //     break;
-    //   }
-    //   prevDecimal = currentDecimal; // 前の数字を更新
-    // }
-    
-    // if (!isAscending) {
-    // }
-    result3.push({ property: 'Result3', value: 'Skip'});
+    const hexPairs = property.match(/.{1,2}/g);
+  
+    for (let i = 0; i < hexPairs.length - 1; i++) {
+      const currentHex = hexPairs[i];
+      const nextHex = hexPairs[i + 1];
+      
+      const value = parseInt(currentHex, 16);
+      result3.push({ property: `pair${i + 1}`, value });
+  
+      if (!nextHex) {
+        break; // 次のペアがない場合はループを抜ける
+      }
+    }
+  
     return result3;
   };
+  
+  // const processFunction3 = (property) => { //一旦無視
+  //   // const result3 = [];
+  //   // const hexPairs = property?.match(/.{1,2}/g);
+  //   // let prevDecimal = parseInt(hexPairs[0],16);
+  //   // let isAscending = true;
+  //   // for ( let i = 1; i < hexPairs.length; i++ ) {
+  //   //   const currentDecimal = parseInt(hexPairs[i], 16);
+  //   //   if (currentDecimal < prevDecimal) {
+  //   //     isAscending = false; // 昇順でない場合フラグをfalseにして終了
+  //   //     break;
+  //   //   }
+  //   //   prevDecimal = currentDecimal; // 前の数字を更新
+  //   // }
+    
+  //   // if (!isAscending) {
+  //   // }
+  //   // console.log("確認用");
+  //   // result3.push({ property: 'Result3', value: 'Skip'});
+  //   // return result3;
+  //   const splitHexPairs = async () => {
+  //     const hexValue = property;
+  //     const hexPairs = (hexValue.match(/.{1,2}/g) || []);
+  //     // ここで非同期処理を行う
+  //     // 例: 非同期で何かのAPIを呼び出す
+  //     const result = await someAsyncFunction();
+  //     return hexPairs;
+  //   };
+    
+  //   splitHexPairs().then(hexPairs => {
+  //     console.log(hexPairs);
+  //   }).catch(error => {
+  //     console.error(error);
+  //   });
+  // };
   const processFunction4 = (property) => {
     console.log(property);
     const result4 = [{ property: '店内イコライザ', value: "" }];
@@ -108,10 +143,28 @@ const MenuComponent = () => {
     return result4;
   };
   const processFunction5 = (property) => {
-    return [];
+    const result5 = [{ property: '事務所イコライザ', value: "" }];
+    const hexPairs = property.match(/.{1,2}/g);
+    hexPairs.map((element, index) => {
+      if ( index >= 0 && index <= 2) {
+        return result5.push({ property: replaceEQ(index), value: hexToSignedDecimal(element) });
+      } else {
+        return result5.push({ property: '種別', value: eqSetting(element)});
+      }
+    })
+    return result5;
   };
   const processFunction6 = (property) => {
-    return [];
+    const result6 = [{ property: 'インカムイコライザ', value: "" }];
+    const hexPairs = property.match(/.{1,2}/g);
+    hexPairs.map((element, index) => {
+      if ( index >= 0 && index <= 2) {
+        return result6.push({ property: replaceEQ(index), value: hexToSignedDecimal(element) });
+      } else {
+        return result6.push({ property: '種別', value: eqSetting(element)});
+      }
+    })
+    return result6;
   };
   const processFunction7 = (property) => {
     return [];
