@@ -6,6 +6,9 @@ import useFileContent from '../utils/useFileContent';
 import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
 import { replaceEQ, eqSetting } from '../utils/menu/menuComponentFunction';
 import { oneTouch } from '../utils/checkButton';
+import { getActionResult } from '../utils/menu/menuComponentFunction';
+import { MenuTable } from '../utils/menu/menuTable';
+
 
 const MenuComponent = () => {
   const { file } = useFileContext(); //fileとsetFileContextを取得
@@ -221,6 +224,8 @@ const MenuComponent = () => {
   const results_all = MenuProcessor({ menu: fileContent?.if_config?.menu || [] });
   const results_all2 = MenuProcessor2({ menu: fileContent?.if_config?.menu || [] });
 
+  const datasets = MenuProcessor3({ menu: fileContent?.if_config?.menu || [] })
+
   return (
     <div>
       {file && (
@@ -260,6 +265,11 @@ const MenuComponent = () => {
                   </div>
                 ))}
                 <h2 ref={wireless2Ref}>ワンタッチボタン一覧</h2>
+                {datasets.map((data, index) => (
+                  <div key={index}>
+                    <MenuTable id={data[0]} call={data[1]} />
+                  </div>
+                ))}
               </div>
             ) : (
               <p>Loading...</p>
@@ -275,3 +285,36 @@ const MenuComponent = () => {
 };
 
 export default MenuComponent;
+
+export const MenuProcessor3 = ({ menu }) => {
+  const datasets = [];
+  for (let i = 44800; i < 45695; i += 56) {
+    const isSameButton = menu[i] === menu[i + 448];
+    if (isSameButton && menu[i]==='00') {
+      const dataset = [
+        [menu[i + 1], menu[i + 5], menu[i + 9], menu[i + 13], menu[i + 17]],
+        [menu[i + 449], menu[i + 453], menu[i + 457], menu[i + 461], menu[i + 465]],
+      ];
+      const firstArrayValue = dataset[0].find(value => value !== "");
+      const secondArrayValue = dataset[1].find(value => value !== "");
+      datasets.push([
+        (i / 56) - 799,
+        firstArrayValue || "<未登録>",
+        secondArrayValue || "<未登録>",
+      ]);
+    } else if(menu[i+448] === undefined) {
+      const dataset = [menu[i + 1], menu[i + 5], menu[i + 9], menu[i + 13], menu[i + 17]];
+      const firstArrayValue = dataset.find(value => value !== "");
+      const secondArrayValue = "";
+      datasets.push([
+        (i / 56) - 799,
+        firstArrayValue || "<未登録>",
+        secondArrayValue,
+      ]);
+    } else {
+      const actionResult = getActionResult(menu, i);
+      datasets.push([(i / 56) - 799, ...actionResult]);
+    }
+  }
+  return datasets;
+};
