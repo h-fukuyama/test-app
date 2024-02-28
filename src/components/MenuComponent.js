@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useFileContext } from '../context/FileContext';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
@@ -17,6 +17,10 @@ const MenuComponent = () => {
       navigate('/reset');
     }
   }, [file, navigate]);
+
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+  const wireless1Ref = useRef(null);
+  const wireless2Ref = useRef(null);
 
   const MenuProcessor = ({ menu }) => {
     const menuPropertyFunctions = [
@@ -222,34 +226,45 @@ const MenuComponent = () => {
       {file && (
         <div>
           <Header />
-          <h2>Menu Page</h2>
-          <p>File Name: {file.name}</p>
-          {fileContent && fileContent.if_config ? (
-            <div>
-              {results_all?.map((result, index) => (
-                <div key={index}>
-                  <h4>{`Result ${index + 1}`}</h4>
-                  <div>
-                    {result.map(({ property, value }) => (
-                      <div key={property}> {`${property}: ${value}`}</div>
-                    ))}
+          <div id="sidebar">
+            {/* サイドバー */}
+            <ul><b>
+              <li onClick={() => scrollToRef(wireless1Ref)}>設定一覧</li>
+              <li onClick={() => scrollToRef(wireless2Ref)}>ワンタッチボタン</li>
+            </b></ul>
+          </div>
+          <div id="main-content">
+            <h2>Menu Page</h2>
+            <p>File Name: {file.name}</p>
+            {fileContent && fileContent.if_config ? (
+              <div>
+                <h2 ref={wireless1Ref}>設定一覧</h2>
+                {results_all?.map((result, index) => (
+                  <div key={index}>
+                    <h4>{`Result ${index + 1}`}</h4>
+                    <div>
+                      {result.map(({ property, value }) => (
+                        <div key={property}> {`${property}: ${value}`}</div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-              {results_all2?.map((result, index) => (
-                <div key={index}>
-                  <h4>{`Result ${index + 998}`}</h4>
-                  <div>
-                    {result.map(({ property, value }) => (
-                      <div key={property}>{`${property}: ${value}`}</div>
-                    ))}
+                ))}
+                {results_all2?.map((result, index) => (
+                  <div key={index}>
+                    <h4>{`Result ${index + 998}`}</h4>
+                    <div>
+                      {result.map(({ property, value }) => (
+                        <div key={property}>{`${property}: ${value}`}</div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p>Loading...</p>
-          )}
+                ))}
+                <h2 ref={wireless2Ref}>ワンタッチボタン一覧</h2>
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
         </div>
       )}
       {!file && (
