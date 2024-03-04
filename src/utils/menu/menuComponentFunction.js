@@ -1,86 +1,82 @@
 import { processBGMBand } from "../bgmBand";
 import { replaceValue, replaceVolume, generateOutput } from "../sc/scComponentFunction";
 
-export const replaceEQ = (value) => {
-    switch (value) {
-      case 0:
-        return "低域";
-      case 1:
-        return "中域";
-      case 2:
-        return "高域";  
-      default:
-        return value; // 何も該当しない場合は元の値をそのまま返す
-    }
-  };
+export const replacePattern = (value) => {
+  switch (value) {
+    case '00':
+      return "分指定再生";
+    case '01':
+      return "1~99回数指定再生";
+    case '02':
+      return "連続再生";  
+    default:
+      return value; // 何も該当しない場合は元の値をそのまま返す
+  }
+};
 
-  export const eqSetting = (value) => {
-    switch (value) {
-      case '00':
-        return "マニュアル";
-      case '01':
-        return "POPS";
-      case '02':
-        return "ROCK";
-      case '03':
-        return "JAZZ/FUSION";
-      case '04':
-        return "VOCAL";
-      case '05':
-        return "CLUB/DANCE";
-      case '06':
-        return "CAFE";
-      case '07':
-        return "LOUNGE";
-      case '08':
-        return "CLASSIC";  
-      case '09':
-        return "HEALING";
-      case '0A':
-        return "イージーリスニング/インスト";            
-      default:
-        return value; // 何も該当しない場合は元の値をそのまま返す
-    }
-  };
+export const replaceEQ = (value) => {
+  switch (value) {
+    case 0:
+      return "低域";
+    case 1:
+      return "中域";
+    case 2:
+      return "高域";  
+    default:
+      return value; // 何も該当しない場合は元の値をそのまま返す
+  }
+};
+
+export const eqSetting = (value) => {
+  switch (value) {
+    case '00':
+      return "マニュアル";
+    case '01':
+      return "POPS";
+    case '02':
+      return "ROCK";
+    case '03':
+      return "JAZZ/FUSION";
+    case '04':
+      return "VOCAL";
+    case '05':
+      return "CLUB/DANCE";  
+    case '06':
+      return "CAFE";
+    case '07':
+      return "LOUNGE";
+    case '08':
+      return "CLASSIC";     
+    case '09':
+      return "HEALING";
+    case '0A':
+      return "イージーリスニング/インスト";      
+    default:
+      return value; // 何も該当しない場合は元の値をそのまま返す
+  }
+};
 
   export const getActionResult = (menu, i) => {
     switch (menu[i]) {
       case '01':
-        const firstElement = `電源${replaceValue(menu[i + 33])}`;
-        const secondElement = menu[i + 448] !== undefined ? `電源${replaceValue(menu[i + 448])}` : "";
-        return [firstElement, secondElement];
-        
+        let channel = "";
+        if(menu[i+50] === '00') {
+          channel = `${processBGMBand(menu[i + 53])}${parseInt(menu[i + 54], 16)}`
+        } else if(menu[i+50] === '01') {
+          channel = "プログラム" + (menu[i+51] === '00' ? "未設定" : menu[i+51]);  
+        } else if(menu[i+50] === '02') {
+          channel = menu[i+52];
+        }
+        return ["チャンネル変更", channel];     
       case '02':
-        const firstElement2 = `チャンネル変更 ${processBGMBand(menu[i + 37])}${parseInt(menu[i + 38], 16)}`;
-        const secondElement2 = "ユーザ設定不可";
-        return [firstElement2, secondElement2];
-      
+        return ["BGM/CMカット", `${generateOutput(menu[i + 62])}`];  
       case '03':
-        const firstElement3 = `BGM/CMカット ${generateOutput(menu[i + 46])}`;
-        const secondElement3 = `BGM/CMカット ${generateOutput(menu[i + 494])}`;
-        return [firstElement3, secondElement3];
-      
+        return [`外部制御${parseInt(menu[i + 63], 16)}`, `${replaceValue(menu[i + 64])}`];    
       case '04':
-        const firstElement4 = `ワンタッチボタン${parseInt(menu[i + 47], 16)} ${replaceValue(menu[i + 48])}`;
-        const secondElement4 = menu[i + 448] !== undefined ? `ワンタッチボタン${parseInt(menu[i + 448], 16)} ${replaceValue(menu[i + 496])}` : "";
-        return [firstElement4, secondElement4];
-      
+        return ["ボリューム", `${replaceVolume(menu[i + 67])}`];      
       case '05':
-        const firstElement5 = `外部制御${parseInt(menu[i + 49], 16)} ${replaceValue(menu[i + 50])}`;
-        const secondElement5 = menu[i + 448] !== undefined ? `外部制御${parseInt(menu[i + 448], 16)} ${replaceValue(menu[i + 498])}` : "";
-        return [firstElement5, secondElement5];
-      
-      case '06':
-        const firstElement6 = `ボリューム ${replaceVolume(menu[i + 53])}`;
-        const secondElement6 = menu[i + 448] !== undefined ? `ボリューム ${replaceVolume(menu[i + 501])}` : "";
-        return [firstElement6, secondElement6];
-      
-      case '07':
-        const firstElement7 = `AUX ${replaceValue(menu[i + 55])}`;
-        const secondElement7 = menu[i + 448] !== undefined ? `AUX ${replaceValue(menu[i + 503])}` : "";
-        return [firstElement7, secondElement7];
-      
+        return ["AUX", `${replaceValue(menu[i + 69])}`];
       default:
-        return [menu[i], menu[i + 22400]];
+        return ["不明", menu[i]];
     }
   };

@@ -6,7 +6,7 @@ import useFileContent from '../utils/useFileContent';
 import { hexToBinary, checkBit, hexToSignedDecimal } from '../utils/calculate';
 import { replaceEQ, eqSetting } from '../utils/menu/menuComponentFunction';
 import { oneTouch } from '../utils/checkButton';
-import { getActionResult } from '../utils/menu/menuComponentFunction';
+import { getActionResult, replacePattern } from '../utils/menu/menuComponentFunction';
 import { MenuTable } from '../utils/menu/menuTable';
 
 
@@ -267,7 +267,7 @@ const MenuComponent = () => {
                 <h2 ref={wireless2Ref}>ワンタッチボタン一覧</h2>
                 {datasets.map((data, index) => (
                   <div key={index}>
-                    <MenuTable id={data[0]} call={data[1]} />
+                    <MenuTable id={data[0]} title={data[1]} call={data[2]} />
                   </div>
                 ))}
               </div>
@@ -288,32 +288,19 @@ export default MenuComponent;
 
 export const MenuProcessor3 = ({ menu }) => {
   const datasets = [];
-  for (let i = 44800; i < 45695; i += 56) {
-    const isSameButton = menu[i] === menu[i + 448];
-    if (isSameButton && menu[i]==='00') {
-      const dataset = [
-        [menu[i + 1], menu[i + 5], menu[i + 9], menu[i + 13], menu[i + 17]],
-        [menu[i + 449], menu[i + 453], menu[i + 457], menu[i + 461], menu[i + 465]],
-      ];
-      const firstArrayValue = dataset[0].find(value => value !== "");
-      const secondArrayValue = dataset[1].find(value => value !== "");
-      datasets.push([
-        (i / 56) - 799,
-        firstArrayValue || "<未登録>",
-        secondArrayValue || "<未登録>",
-      ]);
-    } else if(menu[i+448] === undefined) {
+  for (let i = 17; i < 996; i += 70) {
+    console.log(i);
+    if (menu[i]==='00') {
       const dataset = [menu[i + 1], menu[i + 5], menu[i + 9], menu[i + 13], menu[i + 17]];
       const firstArrayValue = dataset.find(value => value !== "");
-      const secondArrayValue = "";
       datasets.push([
-        (i / 56) - 799,
-        firstArrayValue || "<未登録>",
-        secondArrayValue,
-      ]);
+        ((i - 17) / 70) + 1,
+        firstArrayValue ? replacePattern(menu[i+22]) : "<未登録>",
+        firstArrayValue || "",
+      ]); 
     } else {
       const actionResult = getActionResult(menu, i);
-      datasets.push([(i / 56) - 799, ...actionResult]);
+      datasets.push([((i -17 )/70)+1, ...actionResult]);
     }
   }
   return datasets;

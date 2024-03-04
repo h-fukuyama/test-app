@@ -159,10 +159,18 @@ export const getActionResult1 = (sc, i) => {
         return [firstElement, secondElement];
         
       case '02':
-        const firstElement2 = `チャンネル変更 ${processBGMBand(sc[i + 37])}${parseInt(sc[i + 38], 16)}`;
-        const secondElement2 = "ユーザ設定不可";
-        return [firstElement2, secondElement2];
-      
+        let channel = "";
+        if(sc[i+34] === '00') {
+          channel = `${processBGMBand(sc[i + 37])}${parseInt(sc[i + 38], 16)}`
+        } else if(sc[i+34] === '01') {
+          channel = "プログラム" + (sc[i+35] === '00' ? "未設定" : sc[i+35]);  
+        } else if(sc[i+34] === '02') {
+          channel = sc[i+39];
+        }
+        return [
+          "チャンネル変更" + channel,
+          "ユーザ設定不可",
+        ];      
       case '03':
         const firstElement3 = `BGM/CMカット ${generateOutput(sc[i + 46])}`;
         const secondElement3 = `BGM/CMカット ${generateOutput(sc[i + 494])}`;
