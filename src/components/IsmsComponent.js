@@ -28,6 +28,7 @@ const IsmsComponent = () => {
     const results = [];
 
     for (let i = 0; i < 14 ; i++) {
+      if(i===2||i===6||i===7||i===8||i===9||i===10){continue}
       const property = isms[i];
       const func = ismsPropertyFunctions[i];
       const results2 = [];
