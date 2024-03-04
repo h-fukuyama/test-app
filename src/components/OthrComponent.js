@@ -30,6 +30,7 @@ const OthrComponent = () => {
     const results = [];
 
     for (let i = 0; i < 33 ; i++) {
+      if(i===1||i===2||i===3||i===4){continue}
       const property = other[i];
       const func = otherPropertyFunctions[i];
 
