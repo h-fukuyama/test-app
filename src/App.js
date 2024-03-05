@@ -9,6 +9,8 @@ import MenuComponent from './components/MenuComponent';
 import MenuDetail from './components/MenuDetail';
 import IsmsComponent from './components/IsmsComponent';
 import LtComponent from './components/LtComponent';
+import LtDetail from './components/LtDetail';
+import LtSpecific from './components/LtSpecific';
 import FileInputScreen from './components/FileInputScreen';
 import ResetComponent from './components/ResetComponent';
 import './App.css';
@@ -25,8 +27,9 @@ function App() {
           <Route path="/menu" element={<MenuComponent />} /> {/* 詳細表示が必要 */} 
             <Route path="/menu/:id" element={<MenuDetail />} />
           <Route path="/isms" element={<IsmsComponent />} />
-          <Route path="/lt" element={<LtComponent />} /> {/* 詳細表示が必要 */}
-            <Route path="/lt/:id" element={<ScComponent />} />
+          <Route path="/lt" element={<LtComponent />} /> {/* 詳細表示2階層分が必要 */}
+            <Route path="/lt/:id" element={<LtDetail />} />
+              <Route path="lt/:id/id2" element={<LtSpecific />} />
           <Route path="/othr" element={<OthrComponent />} />
           <Route path="/reset" element={<ResetComponent />} />
         </Routes>

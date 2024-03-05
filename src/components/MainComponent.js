@@ -22,11 +22,15 @@ const MainComponent = () => {
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
   const staffCall = useRef(null);
   const oneTouch = useRef(null);
+  const localTimer = useRef(null);
 
   const datasets1 = ScProcessor1({ sc: fileContent?.if_config?.sc || [] });
   const datasets2 = ScProcessor2({ sc: fileContent?.if_config?.sc || [] });
 
   const datasets3 = MenuProcessor3({ menu: fileContent?.if_config?.menu || [] });
+
+  // const datasets4 = LtProcessor({ lt: fileContent?.if_config?.lt || [] });
+
   return (
     <div>
       {file && (
@@ -37,6 +41,7 @@ const MainComponent = () => {
             <ul><b>
               <li onClick={() => scrollToRef(staffCall)}>スタッフコール</li>
               <li onClick={() => scrollToRef(oneTouch)}>ワンタッチボタン</li>
+              <li onClick={() => scrollToRef(localTimer)}>ローカルタイマー</li>
             </b></ul>
           </div>
           <div id="main-content">
@@ -77,6 +82,14 @@ const MainComponent = () => {
                       )}
                     </div>
                   ))}
+                  <h2 ref={localTimer}>登録済みローカルタイマー</h2>
+                  {/* {datasets4.map((data, index) => (
+                    <div key={index}>
+                      {(data[1] !== "<未登録>" || data[2] !== "") && (
+                        <MenuTable id={data[0]} title={data[1]} call={data[2]} />
+                      )}
+                    </div>
+                  ))} */}
               </div>
             ) : (
               <p>Loading...</p>
