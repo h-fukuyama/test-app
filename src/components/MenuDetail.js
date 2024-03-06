@@ -53,7 +53,6 @@ const MenuDetail = () => {
           return <MenuDetailTable0 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} repeat={repeat} external={external} channel={channel} params={params}/>;
       case '01': //チャンネル変更:9行
           let channel_Name = "";
-          console.log(menu[startIndex+50])
           if(menu[startIndex+50] === '00') {
             channel_Name = `${processBGMBand(menu[startIndex + 53])}${parseInt(menu[startIndex + 54], 16)}`
           } else if(menu[startIndex+50] === '01') {

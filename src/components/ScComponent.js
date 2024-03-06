@@ -12,7 +12,6 @@ const ScComponent = () => {
   const { file } = useFileContext();
   const { fileContent } = useFileContent(file);
   const navigate = useNavigate();
-  // const location = useLocation();
 
   useEffect(() => {
     if (!file) {

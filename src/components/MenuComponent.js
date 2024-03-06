@@ -289,7 +289,6 @@ export default MenuComponent;
 export const MenuProcessor3 = ({ menu }) => {
   const datasets = [];
   for (let i = 17; i < 996; i += 70) {
-    console.log(i);
     if (menu[i]==='00') {
       const dataset = [menu[i + 1], menu[i + 5], menu[i + 9], menu[i + 13], menu[i + 17]];
       const firstArrayValue = dataset.find(value => value !== "");
