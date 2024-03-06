@@ -7,6 +7,9 @@ import { ScProcessor1, ScProcessor2 } from './ScComponent'
 import { ScTable1, ScTable2 } from '../utils/sc/scTable';
 import { MenuTable } from '../utils/menu/menuTable';
 import { MenuProcessor3 } from './MenuComponent';
+import { hexToBinary } from '../utils/calculate';
+import { LtMainTable } from '../utils/lt/ltMainTable';
+import { oneTouch } from '../utils/checkButton';
 
 const MainComponent = () => {
   const { file } = useFileContext();
@@ -21,7 +24,7 @@ const MainComponent = () => {
 
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
   const staffCall = useRef(null);
-  const oneTouch = useRef(null);
+  const oneTouchButton = useRef(null);
   const localTimer = useRef(null);
 
   const datasets1 = ScProcessor1({ sc: fileContent?.if_config?.sc || [] });
@@ -29,7 +32,17 @@ const MainComponent = () => {
 
   const datasets3 = MenuProcessor3({ menu: fileContent?.if_config?.menu || [] });
 
-  // const datasets4 = LtProcessor({ lt: fileContent?.if_config?.lt || [] });
+  const lt = fileContent?.if_config?.lt;
+  const menu = fileContent?.if_config?.menu[10];
+  const datasets4 = [];
+  if(lt&&menu){
+    const ltOn = oneTouch(menu, '');
+    for( let i = 1; i <= 7; i++ ){
+      const title = lt[((i-1)*4702)+1]? lt[((i-1)*4702)+1] : 'ローカルタイマー'+i+'(ユーザ未定義)';
+      const numbers = ltOn[0].value.split(',').map(Number);
+      datasets4.push([numbers.includes(i) ? 'ON' : 'OFF',i,hexToBinary(lt[(i-1)*4702]),title]);
+    }
+  }
 
   return (
     <div>
@@ -40,7 +53,7 @@ const MainComponent = () => {
             {/* サイドバー */}
             <ul><b>
               <li onClick={() => scrollToRef(staffCall)}>スタッフコール</li>
-              <li onClick={() => scrollToRef(oneTouch)}>ワンタッチボタン</li>
+              <li onClick={() => scrollToRef(oneTouchButton)}>ワンタッチボタン</li>
               <li onClick={() => scrollToRef(localTimer)}>ローカルタイマー</li>
             </b></ul>
           </div>
@@ -58,6 +71,7 @@ const MainComponent = () => {
                     )}
                   </div>
                 ))}
+                <br /><br /><br />
                 <h3>無線② UTW/WCシリーズ(1~16)</h3>
                   {datasets2.map((data, index) => (
                     <div key={index}>
@@ -66,6 +80,7 @@ const MainComponent = () => {
                       )}
                     </div>
                   ))}
+                  <br /><br /><br />
                   <h3>有線(1~16)</h3>
                   {datasets2.map((data, index) => (
                     <div key={index}>
@@ -74,7 +89,8 @@ const MainComponent = () => {
                       )}
                     </div>
                   ))}
-                  <h2 ref={oneTouch}>登録済みワンタッチボタン</h2>
+                  <br /><br /><br />
+                  <h2 ref={oneTouchButton}>登録済みワンタッチボタン</h2>
                   {datasets3.map((data, index) => (
                     <div key={index}>
                       {(data[1] !== "<未登録>" || data[2] !== "") && (
@@ -82,14 +98,16 @@ const MainComponent = () => {
                       )}
                     </div>
                   ))}
-                  <h2 ref={localTimer}>登録済みローカルタイマー</h2>
-                  {/* {datasets4.map((data, index) => (
+                  <br /><br /><br />
+                  <h2 ref={localTimer}>ローカルタイマーON状態のみ</h2>
+                  {datasets4.map((data, index) => (
                     <div key={index}>
-                      {(data[1] !== "<未登録>" || data[2] !== "") && (
-                        <MenuTable id={data[0]} title={data[1]} call={data[2]} />
+                      {(data[0] !== 'OFF') && ( 
+                        <LtMainTable power={data[0]} id={data[1]} week={data[2]} title={data[3]} />
                       )}
                     </div>
-                  ))} */}
+                  ))}
+                  <br /><br /><br />
               </div>
             ) : (
               <p>Loading...</p>

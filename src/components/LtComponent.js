@@ -23,7 +23,6 @@ const LtComponent = () => {
   const datasets = [];
   if(lt&&menu){
     const ltOn = oneTouch(menu, '');
-    console.log(ltOn[0].value)
     for( let i = 1; i <= 7; i++ ){
       const title = lt[((i-1)*4702)+1]? lt[((i-1)*4702)+1] : 'ローカルタイマー'+i+'(ユーザ未定義)';
       const numbers = ltOn[0].value.split(',').map(Number);
