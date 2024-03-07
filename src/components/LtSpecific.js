@@ -75,8 +75,7 @@ const LtSpecific = () => {
               {fileContent && (
                 <div>
                   <h3>ローカルタイマー{id}の要素{id2}</h3>
-                    {table}
-                </div>
+                  {table.props.fileName?.join('') === '' ? '未登録' : table}                </div>
               )}
             </div>
           )}
