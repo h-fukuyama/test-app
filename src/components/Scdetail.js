@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFileContext } from '../context/FileContext';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
 import { ScDetailTable0, ScDetailTable1, ScDetailTable2, ScDetailTable3, ScDetailTable4, ScDetailTable5, ScDetailTable6 } from '../utils/sc/ScDetailTable';
@@ -13,10 +13,8 @@ const ScDetail = () => {
   const { fileContent } = useFileContent(file); //fileのファイルの内容を読み込む
   const navigate = useNavigate();
   const { id } = useParams();
-  const location = useLocation();
-  const params = location.key;
   const startIndex = id >= 101 ? (id - 101) * 56 : ((id - 1) * 56)+44800;
-  
+
   useEffect(() => {
     if (!file) {
       navigate('/reset');
@@ -50,7 +48,7 @@ const ScDetail = () => {
               }
           })();
           channel.push(channelName);
-          return <ScDetailTable0 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} repeat={repeat} external={external} channel={channel} params={params}/>;
+          return <ScDetailTable0 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} repeat={repeat} external={external} channel={channel}/>;
       case '01': //電源制御:1行
           return <ScDetailTable1 title="電源ON/OFF" power={replaceValue(sc[startIndex+33])} back={sc[startIndex+22400] === '00' ? "利用しない" : "利用する"} />;
       case '02': //チャンネル変更:9行(呼び戻し無し)

@@ -70,10 +70,6 @@ export const MenuDetailTable0 = ({fileName, folder, volume, mixing, output, repe
             <td>チャンネル</td>
             <td colSpan={4}>{channel[1]}</td>
           </tr>
-          <tr>
-            <td>呼び戻し</td>
-            <td colSpan={4}>{params}</td>
-          </tr>
         </>
       )}
       </tbody>

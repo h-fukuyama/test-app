@@ -11,7 +11,7 @@ export const LtDetailTable = ({ week, title }) => {
             <tbody>
                 <tr align='center'>
                     <td width="30%" textalign="center">名前</td>
-                    <td width="70%" textalign="center">{title}</td>
+                    <td width="70%" textalign="center" colSpan={7}>{title}</td>
                 </tr>
                 <tr align='center'>
                     <td width="30%" textalign="center">曜日</td>
