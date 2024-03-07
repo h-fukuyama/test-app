@@ -29,7 +29,7 @@ function App() {
           <Route path="/isms" element={<IsmsComponent />} />
           <Route path="/lt" element={<LtComponent />} /> {/* 詳細表示2階層分が必要 */}
             <Route path="/lt/:id" element={<LtDetail />} />
-              <Route path="lt/:id/id2" element={<LtSpecific />} />
+              <Route path="lt/:id/:id2" element={<LtSpecific />} />
           <Route path="/othr" element={<OthrComponent />} />
           <Route path="/reset" element={<ResetComponent />} />
         </Routes>

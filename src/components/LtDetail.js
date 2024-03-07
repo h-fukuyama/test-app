@@ -33,7 +33,6 @@ const LtDetail = () => {
         const datasets = [];
         for(let i = 1; i <= 100; i++ ) {
           const startIndex = ((47 * (i - 1)) + ( 4702* (id - 1) + 2));
-          console.log(lt[startIndex]);
           const hour = lt[startIndex]==='18' ? '--': parseInt(lt[startIndex],16);
           const minute = lt[startIndex+1]==='3C' ? '--': parseInt(lt[startIndex+1],16);
           if(lt[startIndex+2]==='00') {

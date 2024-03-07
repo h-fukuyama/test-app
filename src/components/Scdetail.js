@@ -113,7 +113,7 @@ const ScDetail = () => {
           }
         </div>
       )}
-      {!file && <h2>Lt Page</h2>}
+      {!file && <h2>Sc Page</h2>}
     </div>
   );
 };
