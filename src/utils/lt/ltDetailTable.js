@@ -16,7 +16,7 @@ export const LtDetailTable = ({ week, title }) => {
                 <tr align='center'>
                     <td width="30%" textalign="center">曜日</td>
                     {weekArray.map((value, index) => (
-                        <td key={index} width="10%" textalign="center">{value === 1 ? daysOfWeek[index] : ''}</td>
+                        <td key={index} width="10%" textalign="center"><b>{value === 1 ? daysOfWeek[index] : ''}</b></td>
                     ))}
                 </tr>
             </tbody>
@@ -28,11 +28,11 @@ export const LtDetailTable2 = ({ id, id2, hour, minute, call }) => {
         <table align='center'>
             <tbody>
                 <tr align='center'>
-                    <td width="10%" textalign="center">{id2}</td>
-                    <td width="30%" textalign="center">{hour}:{minute}</td>
-                    <td width="50%" textalign="center">{call}</td>
-                    <td width="10%">
-                        <Link to={`/menu/${id}/${id2}`}>
+                    <td width="5%" textalign="center">{id2}</td>
+                    <td width="25%" textalign="center">{hour}:{minute}</td>
+                    <td width="50%" textalign="center"><b>{call}</b></td>
+                    <td width="20%">
+                        <Link to={`/lt/${id}/${id2}`}>
                             <button className="detail-button">詳細表示</button>
                         </Link>
                     </td>
