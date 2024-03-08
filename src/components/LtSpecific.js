@@ -3,7 +3,7 @@ import { useFileContext } from '../context/FileContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from './Header';
 import useFileContent from '../utils/useFileContent';
-import { BinaryConverter, mapFolderValue, replaceControl, replaceValue, replaceSubject, replaceVolume, generateOutput } from '../utils/sc/scComponentFunction';
+import { BinaryConverter, mapFolderValue, replaceControl, replaceValue } from '../utils/sc/scComponentFunction';
 import { LtSpecificTable0, LtSpecificTable1, LtSpecificTable2, LtSpecificTable3 } from '../utils/lt/LtSpecificTable';
 import { processBGMBand } from '../utils/bgmBand';
 import { hexToSignedDecimal } from '../utils/calculate';
@@ -64,10 +64,11 @@ const LtSpecific = () => {
                 } else if(lt[startIndex+35] === '02') {
                   channel_Name = lt[startIndex+37];
                 }
-                const external3 = [(lt[startIndex+39] === '00' ? '利用しない' : '利用する'), parseInt(lt[startIndex+40],16), replaceControl(lt[startIndex+41]), parseInt(lt[startIndex+42],16)];
-                return <LtSpecificTable2 channel={channel_Name} external={external3} hour={hour} minute={minute} />;
+                const external2 = [(lt[startIndex+39] === '00' ? '利用しない' : '利用する'), parseInt(lt[startIndex+40],16), replaceControl(lt[startIndex+41]), parseInt(lt[startIndex+42],16)];
+                return <LtSpecificTable2 channel={channel_Name} external={external2} hour={hour} minute={minute} />;
             case '03': //外部制御
-                return <LtSpecificTable3 external2 hour minute />;
+                const external3 = [parseInt(lt[startIndex+44],16), replaceControl(lt[startIndex+45]), parseInt(lt[startIndex+46],16)];
+                return <LtSpecificTable3 external2={external3} hour={hour} minute={minute} />;
             default:
                 return "";
         }

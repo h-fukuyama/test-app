@@ -152,7 +152,8 @@ export const LtSpecificTable3 = ({external2, hour, minute}) => {
                 <td colSpan={2}><b>{hour}:{minute}</b></td>
             </tr>  
           <tr textalign='center'>
-            <td colSpan={3}><b>外部制御</b></td>
+            <td>機能</td>
+            <td colSpan={2}><b>外部制御</b></td>
           </tr>
           <tr>
             <td>出力先</td>
