@@ -1,11 +1,12 @@
 import React from 'react';
 
-export const ScDetailTable0 = ({fileName, folder, volume, mixing, output, repeat, external, channel, params}) => {
+export const ScDetailTable0 = ({fileName, folder, volume, mixing, output, repeat, external, channel }) => {
   const rowHeaders = ["前チャイム", "コメント①", "コメント②", "コメント③", "後チャイム"];
 
   return (
     <table align='center'>
-      <tr text-align='center'>
+      <tbody>
+      <tr textalign='center'>
         <td colSpan={5}><b>コメント再生</b></td>
       </tr>
       <tr>
@@ -69,12 +70,9 @@ export const ScDetailTable0 = ({fileName, folder, volume, mixing, output, repeat
             <td>チャンネル</td>
             <td colSpan={4}>{channel[1]}</td>
           </tr>
-          <tr>
-            <td>呼び戻し</td>
-            <td colSpan={4}>{params}</td>
-          </tr>
         </>
       )}
+      </tbody>
     </table>
   )
 };
@@ -82,7 +80,8 @@ export const ScDetailTable0 = ({fileName, folder, volume, mixing, output, repeat
 export const ScDetailTable1 = ({title, power, back}) => {
     return (
       <table align='center'>
-        <tr text-align='center'>
+        <tbody>
+        <tr textalign='center'>
           <td colSpan={2}><b>{title}</b></td>
         </tr>
         <tr>
@@ -93,6 +92,7 @@ export const ScDetailTable1 = ({title, power, back}) => {
           <td>呼戻し</td>
           <td>{back}</td>
         </tr>
+        </tbody>
       </table>
     )
 };
@@ -100,7 +100,8 @@ export const ScDetailTable1 = ({title, power, back}) => {
 export const ScDetailTable2 = ({channel, external, back}) => {
   return (
     <table align='center'>
-        <tr text-align='center'>
+      <tbody>
+        <tr textalign='center'>
           <td colSpan={2}><b>チャンネル変更</b></td>
         </tr>
         <tr>
@@ -135,6 +136,7 @@ export const ScDetailTable2 = ({channel, external, back}) => {
           <td>呼戻し</td>
           <td>{back}</td>
         </tr>
+        </tbody>
       </table>
   )
 };
@@ -142,7 +144,8 @@ export const ScDetailTable2 = ({channel, external, back}) => {
 export const ScDetailTable3 = ({action, cm, bgm, minute, back}) => {
   return (
     <table align='center'>
-      <tr text-align='center'>
+      <tbody>
+      <tr textalign='center'>
         <td colSpan={4}><b>BGM/CMカット</b></td>
       </tr>
       <tr>
@@ -177,6 +180,7 @@ export const ScDetailTable3 = ({action, cm, bgm, minute, back}) => {
           <td>呼戻し</td>
           <td>{back}</td>
         </tr>
+        </tbody>
     </table>
   )
 };
@@ -184,7 +188,8 @@ export const ScDetailTable3 = ({action, cm, bgm, minute, back}) => {
 export const ScDetailTable4 = ({button, control, back}) => {
     return (
       <table align='center'>
-          <tr text-align='center'>
+        <tbody>
+          <tr textalign='center'>
             <td colSpan={2}><b>ワンタッチボタン</b></td>
           </tr>
           <tr>
@@ -199,14 +204,16 @@ export const ScDetailTable4 = ({button, control, back}) => {
             <td>呼戻し</td>
             <td>{back}</td>
           </tr>
-        </table>
+          </tbody>
+      </table>
     )
 };
 
 export const ScDetailTable5 = ({external2, back}) => {
     return (
       <table align='center'>
-          <tr text-align='center'>
+        <tbody>
+          <tr textalign='center'>
             <td colSpan={3}><b>外部制御</b></td>
           </tr>
           <tr>
@@ -229,14 +236,16 @@ export const ScDetailTable5 = ({external2, back}) => {
           <td>呼戻し</td>
           <td>{back}</td>
         </tr>
-        </table>
+        </tbody>
+      </table>
     )
 };
 
 export const ScDetailTable6 = ({subject, control, volume, back}) => {
     return (
       <table align='center'>
-          <tr text-align='center'>
+        <tbody>
+          <tr textalign='center'>
             <td colSpan={3}><b>音量制御</b></td>
           </tr>
           <tr>
@@ -258,6 +267,7 @@ export const ScDetailTable6 = ({subject, control, volume, back}) => {
           <td>呼戻し</td>
           <td>{back}</td>
         </tr>
+        </tbody>
         </table>
     )
 };

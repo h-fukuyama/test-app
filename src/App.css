@@ -120,7 +120,7 @@ a:hover {
 }
 
 table {
-  width: 70%;
+  width: 90%;
   border-collapse: collapse;
   margin-bottom: 5px;
 }
@@ -175,4 +175,10 @@ tr:hover {
 #main-content {
   margin-left: 220px; /* Adjust margin to accommodate the sidebar width */
   padding: 20px;
+}
+
+.on {
+  background-color: black;
+  color: white;
+  font-weight: bold;
 }

@@ -310,41 +310,40 @@ const OthrComponent = () => {
   };
   //ルールがあってるか確認が必要？
   const processFunction30 = (property) => {
-    return checkButton(property, 14, 'ワンタッチボタン');
+    return checkButton(property, 14, 'ワンタッチ変更許可ボタン');
   };
   const processFunction31 = (property) => {
     const results31 = [];
     if (property) {
       const binaryArray = property.split('').map((hexDigit) => {
-        const binaryDigit = parseInt(hexDigit, 16).toString(2).padStart(4, '0');
+          const binaryDigit = parseInt(hexDigit, 16).toString(2).padStart(4, '0');
           return binaryDigit;
-        });
-      
+      });
       const binaryString = binaryArray.join('');
-  
       for (let i = 399; i >= 0; i--) {
-        const bitValue = binaryString[i];
-        const buttonName = `ボタン${400 - i}`;
-        const result = { property: buttonName, value: bitValue === '0' ? '許可' : '禁止' };
-        results31.push(result);
+          const bitValue = binaryString[i];
+          const buttonName = `ボタン${400 - i}`;
+          const result = { property: buttonName, value: bitValue === '0' ? '許可' : '禁止' };
+          results31.push(result);
       }
-      
       const deniedButtons = results31.filter((result) => result.value === '禁止');
       if (results31.every((result) => result.value === '許可')) {
-        return [{ property: 'スタッフコール無線①', value: '全て許可' }];
+          return [{ property: 'スタッフコール無線①変更', value: '全て許可' }];
       } else if (results31.every((result) => result.value === '禁止')) {
-        return [{ property: 'スタッフコール無線①', value: '全て禁止' }];
+          return [{ property: 'スタッフコール無線①変更', value: '全て禁止' }];
       }
+      deniedButtons.unshift({ property: 'スタッフコール無線①変更', value: "" }); // 最初に追加する
       return deniedButtons;
     } else {
-      return [{ property: 'スタッフコール無線①', value: '不明' }];
+      return [{ property: 'スタッフコール無線①変更', value: '不明' }];
     }
-  };
+};
+
   const processFunction32 = (property) => {
-    return checkButton(property, 16, 'スタッフコール無線②');
+    return checkButton(property, 16, 'スタッフコール無線②変更許可ボタン');
   };
   const processFunction33 = (property) => {
-    return checkButton(property, 16, 'スタッフコール有線');
+    return checkButton(property, 16, 'スタッフコール有線許可ボタン');
   };
 
 // ここまで-----------------------------------------------------------
