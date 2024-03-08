@@ -77,7 +77,7 @@ export const LtSpecificTable0 = ({fileName, folder, volume, mixing, output, exte
   )
 };
 
-export const LtSpecificTable1 = ({title, power, hour, minute}) => {
+export const LtSpecificTable1 = ({ power, hour, minute}) => {
     return (
       <table align='center'>
         <tbody>
@@ -87,7 +87,7 @@ export const LtSpecificTable1 = ({title, power, hour, minute}) => {
         </tr>
         <tr textalign='center'>
           <td>機能</td>
-          <td><b>{title}</b></td>
+          <td><b>電源ON/OFF</b></td>
         </tr>
         <tr>
           <td>動作</td>

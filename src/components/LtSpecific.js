@@ -23,10 +23,10 @@ const LtSpecific = () => {
   
     const LtSpecificProcessor = ({ lt,id,id2 }) => {  
         const startIndex = ((47 * (id2 - 1)) + ( 4702* (id - 1) + 2));
+        const hour = lt[startIndex]==='18' ? '--': parseInt(lt[startIndex],16);
+        const minute = lt[startIndex+1]==='3C' ? '--': parseInt(lt[startIndex+1],16);
         switch(lt[startIndex+2]) {
             case '00': //コメント再生
-                const hour = lt[startIndex]==='18' ? '--': parseInt(lt[startIndex],16);
-                const minute = lt[startIndex+1]==='3C' ? '--': parseInt(lt[startIndex+1],16);
                 const fileName = [lt[startIndex+3],lt[startIndex+7],lt[startIndex+11],lt[startIndex+15],lt[startIndex+19]];
                 const folder = [lt[startIndex+4],lt[startIndex+8],lt[startIndex+12],lt[startIndex+16],lt[startIndex+17]];
                 const transformedFolder = folder.map(mapFolderValue);
@@ -53,7 +53,7 @@ const LtSpecific = () => {
                 channel.push(channelName);
                 return <LtSpecificTable0 fileName={fileName} folder={transformedFolder} volume={transformedVolume} mixing={transformedMixing} output={output} external={external} channel={channel} hour={hour} minute={minute} />;
             case '01': //電源制御
-                return <LtSpecificTable1 title power hour minute />;
+                return <LtSpecificTable1 power={replaceValue(lt[startIndex+34])} hour={hour} minute={minute} />;
             case '02': //チャンネル変更
                 return <LtSpecificTable2 channel external hour minute />;
             case '03': //外部制御
