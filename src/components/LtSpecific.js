@@ -55,7 +55,17 @@ const LtSpecific = () => {
             case '01': //電源制御
                 return <LtSpecificTable1 power={replaceValue(lt[startIndex+34])} hour={hour} minute={minute} />;
             case '02': //チャンネル変更
-                return <LtSpecificTable2 channel external hour minute />;
+                let channel_Name = "";
+                if(lt[startIndex+35] === '00') {
+                  const num = parseInt(lt[startIndex + 39], 16)===0?'':parseInt(lt[startIndex + 39], 16);
+                  channel_Name = `${processBGMBand(lt[startIndex + 38])}${num}`
+                } else if(lt[startIndex+35] === '01') {
+                  channel_Name = "プログラム" + (lt[startIndex+35] === '00' ? "未設定" : lt[startIndex+36]);  
+                } else if(lt[startIndex+35] === '02') {
+                  channel_Name = lt[startIndex+37];
+                }
+                const external3 = [(lt[startIndex+39] === '00' ? '利用しない' : '利用する'), parseInt(lt[startIndex+40],16), replaceControl(lt[startIndex+41]), parseInt(lt[startIndex+42],16)];
+                return <LtSpecificTable2 channel={channel_Name} external={external3} hour={hour} minute={minute} />;
             case '03': //外部制御
                 return <LtSpecificTable3 external2 hour minute />;
             default:

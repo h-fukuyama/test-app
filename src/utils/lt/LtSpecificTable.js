@@ -107,7 +107,8 @@ export const LtSpecificTable2 = ({channel, external, hour, minute}) => {
             <td ><b>{hour}:{minute}</b></td>
         </tr>
         <tr textalign='center'>
-          <td colSpan={2}><b>チャンネル変更</b></td>
+          <td>機能</td>
+          <td><b>チャンネル変更</b></td>
         </tr>
         <tr>
           <td>チャンネル</td>
